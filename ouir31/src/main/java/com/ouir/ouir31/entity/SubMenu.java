@@ -9,14 +9,12 @@ import javax.persistence.*;
 @Data
 public class SubMenu {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int sno;
-
     @Column(nullable = false, length = 20)
     private String sitem;
 
     @Column(nullable = false)
     private int sprice;
 
-
+    @Column(nullable = false, length = 10)
+    private String stype;
 }

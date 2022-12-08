@@ -10,9 +10,6 @@ import javax.persistence.*;
 @Data
 public class Menu {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int mno;
-
     @Column(nullable = false,length = 20)
     private String mitem;
 
