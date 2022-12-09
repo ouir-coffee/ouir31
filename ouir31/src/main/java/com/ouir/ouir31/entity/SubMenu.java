@@ -1,6 +1,7 @@
 package com.ouir.ouir31.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -12,9 +13,16 @@ public class SubMenu {
     @Column(nullable = false, length = 20)
     private String sitem;
 
-    @Column(nullable = false)
-    private int sprice;
+    @Column(nullable = true)
+    @ColumnDefault("0")
+    private boolean sshot;
 
-    @Column(nullable = false, length = 10)
-    private String stype;
+    @Column(nullable = true)
+    @ColumnDefault("0")
+    private boolean ssyrup;
+
+    @Column(nullable = true)
+    @ColumnDefault("0")
+    private boolean swhipping;
+
 }

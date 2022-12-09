@@ -17,5 +17,5 @@ public class Menu {
     private int mprice;
 
     @Column(nullable = false)
-    private Boolean mtype;
+    private String mtype;
 }
