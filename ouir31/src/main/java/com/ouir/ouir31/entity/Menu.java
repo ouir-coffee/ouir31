@@ -10,12 +10,15 @@ import javax.persistence.*;
 @Data
 public class Menu {
     @Id
-    @Column(nullable = false,length = 20)
-    private String mitem;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int m_no;
+
+    @Column(nullable = false, length = 20)
+    private String m_item;
 
     @Column(nullable = false)
-    private int mprice;
+    private int m_price;
 
-    @Column(nullable = false)
-    private String mtype;
+    @Column(nullable = false, length = 10)
+    private String m_type;
 }

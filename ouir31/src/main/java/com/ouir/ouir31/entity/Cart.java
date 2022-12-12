@@ -1,6 +1,7 @@
 package com.ouir.ouir31.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -10,29 +11,22 @@ import javax.persistence.*;
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long chno;
+    private long c_no;
 
     @ManyToOne
-    @JoinColumn(name = "chmitem")
-    private Menu chmitem;
+    @JoinColumn(name = "c_m_no")
+    private Menu c_m_no;
 
     @Column(nullable = false)
-    private int chmcount;
-
-    @Column(nullable = false)
-    private int chshot;
-
-    @Column(nullable = false)
-    private int chsyrup;
-
-    @Column(nullable = false)
-    private int chwhipping;
+    @ColumnDefault("1")
+    private int c_mcount;
 
     @ManyToOne
-    @JoinColumn(name = "chuid")
-    private User chuid;
+    @JoinColumn(name = "c_u_id")
+    private User c_u_id;
 
     @Column(nullable = false)
-    private boolean chcomp;
+    @ColumnDefault("false")
+    private boolean c_comp;
 
 }

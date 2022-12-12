@@ -11,11 +11,11 @@ import javax.persistence.*;
 public class Admin {
     @Id
     @Column(nullable = false, length = 20)
-    private String aid;
+    private String a_id;
 
     @Column(nullable = false, length = 70)
-    private String apwd;
+    private String a_pwd;
 
     @Column(nullable = false, length = 20)
-    private String aname;
+    private String a_name;
 }

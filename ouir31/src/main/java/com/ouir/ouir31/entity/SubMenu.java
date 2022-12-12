@@ -10,19 +10,23 @@ import javax.persistence.*;
 @Data
 public class SubMenu {
     @Id
-    @Column(nullable = false, length = 20)
-    private String sitem;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long s_no;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     @ColumnDefault("0")
-    private boolean sshot;
+    private int s_shot;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     @ColumnDefault("0")
-    private boolean ssyrup;
+    private int s_syrup;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     @ColumnDefault("0")
-    private boolean swhipping;
+    private int s_whipping;
+
+    @ManyToOne
+    @JoinColumn(name = "s_c_no")
+    private Cart s_c_no;
 
 }
