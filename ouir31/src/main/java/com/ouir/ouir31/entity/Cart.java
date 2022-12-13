@@ -21,12 +21,24 @@ public class Cart {
     @ColumnDefault("1")
     private int c_mcount;
 
-    @ManyToOne
-    @JoinColumn(name = "c_u_id")
-    private User c_u_id;
+    @Column(nullable = false)
+    @ColumnDefault("0")
+    private int c_shot;
+
+    @Column(nullable = false)
+    @ColumnDefault("0")
+    private int c_syrup;
+
+    @Column(nullable = false)
+    @ColumnDefault("0")
+    private int c_whipping;
 
     @Column(nullable = false)
     @ColumnDefault("false")
     private boolean c_comp;
+
+    @ManyToOne
+    @JoinColumn(name = "c_u_id")
+    private User c_u_id;
 
 }
