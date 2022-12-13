@@ -18,7 +18,7 @@ public class SubMenuService {
 
     public boolean subMenuInsert(SubMenu submenu, HttpSession session) {
         log.info("subMenuInsert()");
-        boolean result;
+        boolean result = false;
 
         try{
             smRepo.save(submenu);
