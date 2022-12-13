@@ -25,10 +25,18 @@ public class CartController {
         log.info("cartWrite()");
         return cServ.insertCart(cart);
     }
+
     @PostMapping("/cart/list")
     @ResponseBody
     public List<Cart> cartList(){
         log.info("cartList()");
         return cServ.cartList();
+    }
+
+    @PostMapping("/cart/search")
+    @ResponseBody
+    public Cart cartSearch(long c_no){
+        log.info("cartSearch()");
+        return cServ.cartSearch(c_no);
     }
 }

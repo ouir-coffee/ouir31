@@ -46,4 +46,9 @@ public class CartService {
         log.info("cartList()");
         return cRepo.findAll();
     }
+
+    public Cart cartSearch(long c_no) {
+        log.info("cartSearch()");
+        return cRepo.findById(c_no).get();
+    }
 }
