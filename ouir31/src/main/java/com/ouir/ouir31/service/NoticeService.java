@@ -39,14 +39,14 @@ public class NoticeService {
         rm.setFlag(false);
 
         try {
-            Notice n = nRepo.findById(notice.getN_no()).get();
+            Notice n = nRepo.findById(notice.getNNo()).get();
             if(n.equals(null)){
                 rm.setFlag(false);
                 rm.setMsg("게시글이 존재하지 않습니다.");
                 return rm;
             }
-            n.setN_title(notice.getN_title());
-            n.setN_contents(notice.getN_contents());
+            n.setNTitle(notice.getNTitle());
+            n.setNContents(notice.getNContents());
             nRepo.save(n);
             rm.setFlag(true);
             rm.setMsg("수정되었습니다.");
@@ -58,16 +58,16 @@ public class NoticeService {
         return rm;
     }//공지수정
 
-    public ReturnMsg noticeDelete(long n_no){
+    public ReturnMsg noticeDelete(long nNo){
         log.info("noticeDelete()");
         ReturnMsg rm = new ReturnMsg();
         rm.setFlag(false);
 
         Notice notice = new Notice();
-        notice.setN_no(n_no);
+        notice.setNNo(nNo);
 
         try {
-            nRepo.deleteById(n_no);
+            nRepo.deleteById(nNo);
             rm.setFlag(true);
             rm.setMsg("삭제되었습니다.");
         }catch (Exception e){

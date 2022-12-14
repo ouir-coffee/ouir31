@@ -13,15 +13,15 @@ import java.sql.Timestamp;
 public class Notice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long n_no;
+    private long nNo;
 
     @Column(nullable = false, length = 20)
-    private String n_title;
+    private String nTitle;
 
     @Column(nullable = false, length = 255)
-    private String n_contents;
+    private String nContents;
 
     @CreationTimestamp
     @Column
-    private Timestamp n_date;
+    private Timestamp nDate;
 }
