@@ -26,10 +26,10 @@ public class UserController {
         return uServ.insertUser(user);
     }
 
-//    @PostMapping("/user/join")
-//    @ResponseBody
-//    public ReturnMsg login(User user, HttpSession session){
-//        log.info("login()");
-//        return uServ.loginProc(user, session);
-//    }
+    @PostMapping("/user/join")
+    @ResponseBody
+    public ReturnMsg login(User user, HttpSession session){
+        log.info("login()");
+        return uServ.loginProc(user, session);
+    }
 }

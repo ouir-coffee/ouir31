@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface UserRepository extends CrudRepository<User, String> {
 
-//    User findByUId(String uId);
+    User findByUid(String uid);
 }

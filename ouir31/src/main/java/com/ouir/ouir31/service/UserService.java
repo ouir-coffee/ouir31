@@ -39,37 +39,39 @@ public class UserService {
         return rm;
     }
 
-//    public ReturnMsg loginProc(User user, HttpSession session){
-//        log.info("loginProc()");
-//        ReturnMsg rm = new ReturnMsg();
-//        rm.setFlag(false);
-//
-//        try {
-//            User uData = uRepo.findByUId(user.getUId());
-//
-//            if(uData == null){
-//                rm.setMsg("해당 아이디가 존재하지 않습니다.");
-//                rm.setFlag(false);
-//            }else{
-//                String cPwd = user.getUPwd();
-//                String getPwd = uData.getUPwd();
-//
-//                if(cPwd.equals(getPwd)){
-//                    session.setAttribute("loginName",uData.getUName());
-//                    session.setAttribute("loginId",uData.getUId());
-//                    rm.setMsg("로그인 성공");
-//                    rm.setFlag(true);
-//                } else {
-//                    rm.setMsg("로그인 실패");
-//                    rm.setFlag(false);
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            rm.setMsg("로그인 실패");
-//            rm.setFlag(false);
-//        }
-//
-//        return rm;
-//    }
+    public ReturnMsg loginProc(User user, HttpSession session){
+        log.info("loginProc()");
+        ReturnMsg rm = new ReturnMsg();
+        rm.setFlag(false);
+
+        User uData = null;
+        uData = uRepo.findByUid(user.getUid());
+
+        try {
+            if(uData != null){
+                String cPwd = user.getUpwd();
+                String getPwd = uData.getUpwd();
+
+                if(cPwd.equals(getPwd)){
+                    session.setAttribute("loginName",uData.getUname());
+                    session.setAttribute("loginId",uData.getUid());
+                    rm.setMsg("로그인 성공");
+                    rm.setFlag(true);
+                } else {
+                    rm.setMsg("비밀번호를 확인해주세요.");
+                    rm.setFlag(false);
+                }
+            }else {
+                rm.setMsg("아이디를 찾을 수 없습니다.");
+                rm.setFlag(false);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            rm.setMsg("로그인 실패");
+            rm.setFlag(false);
+        }
+
+        return rm;
+    }
 }
