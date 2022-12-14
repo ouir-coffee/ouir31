@@ -43,7 +43,7 @@ public class NoticeController {
     @ResponseBody
     public ReturnMsg noticeDelete(Notice notice){
         log.info("noticeDelete()");
-        return nServ.noticeDelete(notice.getNNo());
+        return nServ.noticeDelete(notice.getNno());
     }
 
     @GetMapping("/notice/list")
