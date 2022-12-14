@@ -36,16 +36,16 @@ public class MenuService {
         return mRepo.findAll();
     }
 
-    public Menu menuSearch(int m_no) {
+    public Menu menuSearch(int mNo) {
         log.info("menuSearch()");
 
         try{
-            Menu menu = mRepo.findById(m_no).get();
+            Menu menu = mRepo.findById(mNo).get();
             mRepo.save(menu);
         }catch(Exception e){
             e.printStackTrace();
         }
-        return mRepo.findById(m_no).get();
+        return mRepo.findById(mNo).get();
     }
 
 
@@ -55,14 +55,14 @@ public class MenuService {
         rm.setFlag(false);
 
         try{
-            Menu m = mRepo.findById(menu.getM_no()).get();
+            Menu m = mRepo.findById(menu.getMNo()).get();
             if(m.equals(null)){
                 rm.setFlag(false);
                 rm.setMsg("데이터가 없습니다.");
                 return rm;
             }
-            m.setM_type(menu.getM_type());
-            m.setM_price(menu.getM_price());
+            m.setMType(menu.getMType());
+            m.setMPrice(menu.getMPrice());
             mRepo.save(m);
             rm.setFlag(true);
             rm.setMsg("수정 성공하였습니다.");

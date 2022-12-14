@@ -29,8 +29,8 @@ public class CartService {
         rm.setFlag(false);
 
         try{
-            cart.setC_m_no(mRepo.findById(1).get());
-            cart.setC_u_id(uRepo.findById("potato").get());
+            cart.setCmNo(mRepo.findById(1).get());
+            cart.setCuId(uRepo.findById("potato").get());
             cRepo.save(cart);
             rm.setMsg("장바구니담기에 성공하였습니다.");
             rm.setFlag(true);
@@ -47,8 +47,39 @@ public class CartService {
         return cRepo.findAll();
     }
 
-    public Cart cartSearch(long c_no) {
+    public Cart cartSearch(long cNo) {
         log.info("cartSearch()");
-        return cRepo.findById(c_no).get();
+        return cRepo.findById(cNo).get();
     }
+
+//    public ReturnMsg cartUpdate(Cart cart) {
+//        log.info("cartUpdate()");
+//        ReturnMsg rm = new ReturnMsg();
+//        rm.setFlag(false);
+//
+//        try{
+//
+//            Cart c = cRepo.findById(cart.getC_no()).get();
+//            if(c.equals(null)){
+//                rm.setFlag(false);
+//                rm.setMsg("데이터가 없습니다.");
+//                return rm;
+//            }
+//        c.setC_shot(cart.getC_shot());
+//        c.setC_syrup(cart.getC_syrup());
+//        c.setC_whipping(cart.getC_whipping());
+//        c.setC_mcount(cart.getC_mcount());
+//        c.setC_comp(cart.isC_comp());
+//        cRepo.save(c);
+//        rm.setFlag(true);
+//        rm.setMsg("수정 성공하였습니다.");
+//        }catch(Exception e){
+//        e.printStackTrace();
+//        rm.setFlag(false);
+//        rm.setMsg("수정 실패하였습니다.");
+//
+//        }
+//
+//        return rm;
+//    }
 }

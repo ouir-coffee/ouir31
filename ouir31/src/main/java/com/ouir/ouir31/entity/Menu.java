@@ -11,14 +11,14 @@ import javax.persistence.*;
 public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int m_no;
+    private int mNo;
 
     @Column(nullable = false, length = 20)
-    private String m_item;
+    private String mItem;
 
     @Column(nullable = false)
-    private int m_price;
+    private int mPrice;
 
     @Column(nullable = false, length = 10)
-    private String m_type;
+    private String mType;
 }

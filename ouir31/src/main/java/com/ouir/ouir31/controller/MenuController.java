@@ -35,9 +35,9 @@ public class MenuController {
 
     @GetMapping("/menu/search")
     @ResponseBody
-    public Menu menuSearch(int m_no){
+    public Menu menuSearch(int mNo){
         log.info("menuSearch()");
-        return mServ.menuSearch(m_no);
+        return mServ.menuSearch(mNo);
     }
 
     @GetMapping("/menu/update")
