@@ -58,16 +58,16 @@ public class NoticeService {
         return rm;
     }//공지수정
 
-    public ReturnMsg noticeDelete(long nNo){
+    public ReturnMsg noticeDelete(long nno){
         log.info("noticeDelete()");
         ReturnMsg rm = new ReturnMsg();
         rm.setFlag(false);
 
         Notice notice = new Notice();
-        notice.setNno(nNo);
+        notice.setNno(nno);
 
         try {
-            nRepo.deleteById(nNo);
+            nRepo.deleteById(nno);
             rm.setFlag(true);
             rm.setMsg("삭제되었습니다.");
         }catch (Exception e){
