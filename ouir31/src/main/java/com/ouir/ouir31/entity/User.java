@@ -12,21 +12,21 @@ import javax.persistence.*;
 public class User {
     @Id
     @Column(nullable = false, length = 20)
-    private String uId;
+    private String uid;
 
     @Column(nullable = false, length = 70)
-    private String uPwd;
+    private String upwd;
 
     @Column(nullable = false, length = 20)
-    private String uName;
+    private String uname;
 
     @Column(nullable = false, length = 50)
-    private String uAdd;
+    private String uadd;
 
     @Column(nullable = false, length = 40)
-    private String uEmail;
+    private String uemail;
 
     @Column(nullable = false, length = 20)
-    private String uPhone;
+    private String uphone;
 
 }

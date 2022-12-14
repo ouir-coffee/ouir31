@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface MenuRepository extends CrudRepository<Menu, Integer> {
 
-//    Menu findMenuByM_no(int m_id);
+//    Menu findByMNo(int mNo);
     List<Menu> findAll();
 }

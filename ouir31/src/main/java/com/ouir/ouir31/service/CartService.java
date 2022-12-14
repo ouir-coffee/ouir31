@@ -29,8 +29,8 @@ public class CartService {
         rm.setFlag(false);
 
         try{
-            cart.setCmNo(mRepo.findById(1).get());
-            cart.setCuId(uRepo.findById("potato").get());
+            cart.setCmno(mRepo.findById(1).get());
+            cart.setCuid(uRepo.findById("goguma").get());
             cRepo.save(cart);
             rm.setMsg("장바구니담기에 성공하였습니다.");
             rm.setFlag(true);
@@ -47,9 +47,9 @@ public class CartService {
         return cRepo.findAll();
     }
 
-    public Cart cartSearch(long cNo) {
+    public Cart cartSearch(long cno) {
         log.info("cartSearch()");
-        return cRepo.findById(cNo).get();
+        return cRepo.findById(cno).get();
     }
 
 //    public ReturnMsg cartUpdate(Cart cart) {

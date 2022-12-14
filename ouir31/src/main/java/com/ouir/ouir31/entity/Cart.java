@@ -11,34 +11,34 @@ import javax.persistence.*;
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long cNo;
+    private long cno;
 
     @ManyToOne
-    @JoinColumn(name = "cmNo")
-    private Menu cmNo;
+    @JoinColumn(name = "cmno")
+    private Menu cmno;
 
     @Column(nullable = false)
     @ColumnDefault("1")
-    private int cMenuCount;
+    private int cmenuCount;
 
     @Column(nullable = false)
     @ColumnDefault("0")
-    private int cShot;
+    private int cshot;
 
     @Column(nullable = false)
     @ColumnDefault("0")
-    private int cSyrup;
+    private int csyrup;
 
     @Column(nullable = false)
     @ColumnDefault("0")
-    private int cWhipping;
+    private int cwhipping;
 
     @Column(nullable = false)
     @ColumnDefault("false")
-    private boolean cComp;
+    private boolean ccomp;
 
     @ManyToOne
-    @JoinColumn(name = "cuId")
-    private User cuId;
+    @JoinColumn(name = "cuid")
+    private User cuid;
 
 }

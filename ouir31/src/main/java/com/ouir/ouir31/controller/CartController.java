@@ -35,9 +35,9 @@ public class CartController {
 
     @PostMapping("/cart/search")
     @ResponseBody
-    public Cart cartSearch(long cNo){
+    public Cart cartSearch(long cno){
         log.info("cartSearch()");
-        return cServ.cartSearch(cNo);
+        return cServ.cartSearch(cno);
     }
 
 //    @PostMapping("/cart/update")
