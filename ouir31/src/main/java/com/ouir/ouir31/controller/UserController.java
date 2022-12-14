@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Member;
 
 @RestController
 @Log
@@ -25,4 +26,10 @@ public class UserController {
         return uServ.insertUser(user);
     }
 
+    @PostMapping("/user/join")
+    @ResponseBody
+    public ReturnMsg login(User user, HttpSession session){
+        log.info("login()");
+        return uServ.loginProc(user, session);
+    }
 }
