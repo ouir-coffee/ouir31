@@ -23,6 +23,7 @@ import java.util.List;
 @RestController
 @Log
 public class VocController {
+
     @Autowired
     private VocService vServ;
 
@@ -61,13 +62,13 @@ public class VocController {
     }
 
     //voc 작성글 출력(개인)
-    @GetMapping("myVoc")
-    public ModelAndView getMyVoc(Integer PageNum, HttpSession session, String uid){
-        mv = new ModelAndView();
-        mv = vServ.getMyVoc(PageNum, session, uid);
-        mv.setViewName("myVoc");
-        return mv;
-    }
+//    @GetMapping("myVoc")
+//    public ModelAndView getMyVoc(Integer PageNum, HttpSession session, String uid){
+//        mv = new ModelAndView();
+//        mv = vServ.getMyVoc(PageNum, session, uid);
+//        mv.setViewName("myVoc");
+//        return mv;
+//    }
 
     // voc 상세보기 페이지
     @GetMapping("detail")

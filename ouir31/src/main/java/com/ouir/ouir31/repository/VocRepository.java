@@ -9,7 +9,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VocRepository extends CrudRepository<Voc,Long> {
 
-    Page<Voc> findByvocnoGreaterThan(long vocno, Pageable pb);
+    Page<Voc> findByVocnoGreaterThan(long vocno, Pageable pb);
 
-    Iterable<Voc> findByvocuid();
+
+//    Iterable<Voc> findByVocuid();
 }

@@ -43,8 +43,6 @@ public class VocService {
     @Autowired
     private VocFileRepository vfRepo;
 
-    @Autowired
-    private UserRepository uRepo;
 
     private ModelAndView mv = new ModelAndView();
 
@@ -152,7 +150,7 @@ public class VocService {
         }
         int listCnt = 5;
         Pageable pb = PageRequest.of((PageNum - 1), listCnt, Sort.Direction.DESC, "vocno");
-        Page<Voc> result = vRepo.findByvocnoGreaterThan(0L, pb);
+        Page<Voc> result = vRepo.findByVocnoGreaterThan(0L, pb);
         List<Voc> vocList = result.getContent();
         int totalPage = result.getTotalPages();
 
@@ -161,51 +159,42 @@ public class VocService {
         mv.addObject("paging", paging);
 
         session.setAttribute("pageNum", PageNum);
-
-        //리스트 찾아다 출력
-        List<Voc> vList = new ArrayList<>();
-        Iterable<Voc> vIter = vRepo.findAll();
-        for (Voc v : vIter){
-            vList.add(v);
-        }
-        mv.addObject("vList", vList);
-        mv.setViewName("VocList");
 
         return mv;
     }
 
     //개인 voc 출력
-    public ModelAndView getMyVoc(Integer PageNum, HttpSession session,
-                                 String uid) {
-
-        mv = new ModelAndView();
-
-        if (PageNum == null) {
-            PageNum = 1;
-        }
-        int listCnt = 5;
-        Pageable pb = PageRequest.of((PageNum - 1), listCnt, Sort.Direction.DESC, "vocno");
-        Page<Voc> result = vRepo.findByvocnoGreaterThan(0L, pb);
-        List<Voc> vocList = result.getContent();
-        int totalPage = result.getTotalPages();
-
-        String paging = getPaging(PageNum, totalPage);
-        mv.addObject("vocList", vocList);
-        mv.addObject("paging", paging);
-
-        session.setAttribute("pageNum", PageNum);
-
-
-        // 개인 작성글 찾기
-        List<Voc> myList = new ArrayList<>();
-        Iterable<Voc> myIter = vRepo.findByvocuid();
-        for (Voc my : myIter){
-            myList.add(my);
-        }
-        mv.addObject("myList", myList);
-        mv.setViewName("myList");
-        return mv;
-    }
+//    public ModelAndView getMyVoc(Integer PageNum, HttpSession session,
+//                                 String uid) {
+//
+//        mv = new ModelAndView();
+//
+//        if (PageNum == null) {
+//            PageNum = 1;
+//        }
+//        int listCnt = 5;
+//        Pageable pb = PageRequest.of((PageNum - 1), listCnt, Sort.Direction.DESC, "vocno");
+//        Page<Voc> result = vRepo.findByVocnoGreaterThan(0L, pb);
+//        List<Voc> vocList = result.getContent();
+//        int totalPage = result.getTotalPages();
+//
+//        String paging = getPaging(PageNum, totalPage);
+//        mv.addObject("vocList", vocList);
+//        mv.addObject("paging", paging);
+//
+//        session.setAttribute("pageNum", PageNum);
+//
+//
+//        // 개인 작성글 찾기
+//        List<Voc> myList = new ArrayList<>();
+//        Iterable<Voc> myIter = vRepo.findByVocuid();
+//        for (Voc my : myIter){
+//            myList.add(my);
+//        }
+//        mv.addObject("myList", myList);
+//        mv.setViewName("myList");
+//        return mv;
+//    }
 
 
 @Transactional
