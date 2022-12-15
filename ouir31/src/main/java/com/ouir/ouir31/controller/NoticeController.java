@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import javax.servlet.http.HttpSession;
 import javax.swing.plaf.PanelUI;
@@ -26,24 +26,24 @@ public class NoticeController {
 
     @GetMapping("/notice/write")
     @ResponseBody
-    public boolean noticeWrite(Notice notice){
+    public boolean noticeWrite(Notice notice,HttpSession session){
         log.info("noticeWrite()");
-        boolean result = nServ.noticeWrite(notice);
+        boolean result = nServ.noticeWrite(notice,session);
         return result;
     }
 
     @PostMapping("/notice/update")
     @ResponseBody
-    public ReturnMsg noticeUpdate(Notice notice){
+    public ReturnMsg noticeUpdate(Notice notice,HttpSession session){
         log.info("noticeUpdate()");
-        return nServ.noticeUpdate(notice);
+        return nServ.noticeUpdate(notice,session);
     }
 
     @PostMapping("/notice/delete")
     @ResponseBody
-    public ReturnMsg noticeDelete(Notice notice){
+    public ReturnMsg noticeDelete(Notice notice,HttpSession session){
         log.info("noticeDelete()");
-        return nServ.noticeDelete(notice.getNno());
+        return nServ.noticeDelete(notice.getNno(),session);
     }
 
     @GetMapping("/notice/list")
