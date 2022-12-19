@@ -1,4 +1,4 @@
-package com.ouir.ouir31.entity;
+package com.ouir.ouir31.entity.MenuOption;
 
 import lombok.Data;
 
@@ -16,10 +16,4 @@ public class OptionCategories {
 
     @Column(nullable = false, length = 20)
     private String ocitem;
-
-    @OneToMany(mappedBy = "optionCategories")
-    private List<Option> options = new ArrayList<Option>();
-
-
-
 }

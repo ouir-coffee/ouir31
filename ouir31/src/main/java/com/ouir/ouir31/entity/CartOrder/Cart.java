@@ -1,5 +1,7 @@
-package com.ouir.ouir31.entity;
+package com.ouir.ouir31.entity.CartOrder;
 
+import com.ouir.ouir31.entity.MenuOption.Menu;
+import com.ouir.ouir31.entity.User;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 

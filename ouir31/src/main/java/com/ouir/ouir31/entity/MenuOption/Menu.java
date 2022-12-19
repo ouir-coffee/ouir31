@@ -1,4 +1,4 @@
-package com.ouir.ouir31.entity;
+package com.ouir.ouir31.entity.MenuOption;
 
 
 import lombok.Data;
@@ -11,6 +11,7 @@ import java.util.List;
 @Table(name = "menutbl")
 @Data
 public class Menu {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int mno;
@@ -22,9 +23,12 @@ public class Menu {
     private int mprice;
 
     @ManyToOne
-    @JoinColumn(name = "mccode")
+    @JoinColumn(name = "menuCategories")
     private MenuCategories menuCategories;
 
-    @OneToMany(mappedBy = "menu")
-    private List<MenuImages> menuImages = new ArrayList<MenuImages>();
+//    @OneToMany(mappedBy = "menu")
+//    private List<MenuImages> menuImages = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "menu")
+//    private List<MenuOption> menuOptions = new ArrayList<>();
 }

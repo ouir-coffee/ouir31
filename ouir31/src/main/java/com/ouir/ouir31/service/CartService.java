@@ -1,10 +1,10 @@
 package com.ouir.ouir31.service;
 
-import com.ouir.ouir31.entity.Cart;
+import com.ouir.ouir31.entity.CartOrder.Cart;
 import com.ouir.ouir31.dto.ReturnMsg;
 import com.ouir.ouir31.entity.User;
 import com.ouir.ouir31.repository.CartRepository;
-import com.ouir.ouir31.repository.MenuRepository;
+import com.ouir.ouir31.repository.MenuOption.MenuRepository;
 import com.ouir.ouir31.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -26,7 +26,7 @@ public class CartService {
         rm.setFlag(false);
 
         try{
-            cart.setCmno(mRepo.findById(1).get());
+            cart.setCmno(mRepo.findById(1));
             cart.setCuid(uRepo.findById("goguma").get());
             cRepo.save(cart);
             rm.setMsg("장바구니담기에 성공하였습니다.");

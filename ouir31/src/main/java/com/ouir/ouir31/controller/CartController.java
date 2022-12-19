@@ -1,6 +1,6 @@
 package com.ouir.ouir31.controller;
 
-import com.ouir.ouir31.entity.Cart;
+import com.ouir.ouir31.entity.CartOrder.Cart;
 import com.ouir.ouir31.dto.ReturnMsg;
 import com.ouir.ouir31.service.CartService;
 import lombok.RequiredArgsConstructor;
