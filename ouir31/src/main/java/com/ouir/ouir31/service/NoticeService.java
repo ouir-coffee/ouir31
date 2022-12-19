@@ -1,11 +1,10 @@
 package com.ouir.ouir31.service;
 
 import com.ouir.ouir31.entity.Notice;
-import com.ouir.ouir31.entity.ReturnMsg;
+import com.ouir.ouir31.dto.ReturnMsg;
 import com.ouir.ouir31.repository.NoticeRepository;
 import com.ouir.ouir31.util.PagingUtil;
 import lombok.extern.java.Log;
-import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;

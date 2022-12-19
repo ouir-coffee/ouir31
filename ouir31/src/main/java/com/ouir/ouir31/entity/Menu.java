@@ -4,6 +4,8 @@ package com.ouir.ouir31.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "menutbl")
@@ -19,6 +21,10 @@ public class Menu {
     @Column(nullable = false)
     private int mprice;
 
-    @Column(nullable = false, length = 10)
-    private String mtype;
+    @ManyToOne
+    @JoinColumn(name = "mccode")
+    private MenuCategories menuCategories;
+
+    @OneToMany(mappedBy = "menu")
+    private List<MenuImages> menuImages = new ArrayList<MenuImages>();
 }

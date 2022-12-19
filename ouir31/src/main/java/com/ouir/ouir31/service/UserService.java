@@ -1,6 +1,6 @@
 package com.ouir.ouir31.service;
 
-import com.ouir.ouir31.entity.ReturnMsg;
+import com.ouir.ouir31.dto.ReturnMsg;
 import com.ouir.ouir31.entity.User;
 import com.ouir.ouir31.repository.UserRepository;
 import lombok.extern.java.Log;
@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.Member;
 
 @Service
 @Log

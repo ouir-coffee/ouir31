@@ -1,4 +1,4 @@
-package com.ouir.ouir31.entity;
+package com.ouir.ouir31.dto;
 
 import lombok.Data;
 

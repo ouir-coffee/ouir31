@@ -1,20 +1,16 @@
 package com.ouir.ouir31.service;
 
 import com.ouir.ouir31.entity.Cart;
-import com.ouir.ouir31.entity.Menu;
-import com.ouir.ouir31.entity.ReturnMsg;
+import com.ouir.ouir31.dto.ReturnMsg;
 import com.ouir.ouir31.entity.User;
 import com.ouir.ouir31.repository.CartRepository;
 import com.ouir.ouir31.repository.MenuRepository;
 import com.ouir.ouir31.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Log
