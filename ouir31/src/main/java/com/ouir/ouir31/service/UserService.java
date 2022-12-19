@@ -24,8 +24,8 @@ public class UserService {
         ReturnMsg rm = new ReturnMsg();
         rm.setFlag(false);
 
-//        String uPwd = encoder.encode(user.getU_pwd());
-//        user.setU_pwd(uPwd);
+//        String uPwd = encoder.encode(user.getUpwd());
+//        user.setUpwd(uPwd);
 
         try{
             uRepo.save(user);

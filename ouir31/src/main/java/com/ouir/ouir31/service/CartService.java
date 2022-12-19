@@ -7,21 +7,22 @@ import com.ouir.ouir31.entity.User;
 import com.ouir.ouir31.repository.CartRepository;
 import com.ouir.ouir31.repository.MenuRepository;
 import com.ouir.ouir31.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Log
+@RequiredArgsConstructor
 public class CartService {
-    @Autowired
-    private CartRepository cRepo;
-    @Autowired
-    private MenuRepository mRepo;
-    @Autowired
-    private UserRepository uRepo;
+    private final CartRepository cRepo;
+    private final MenuRepository mRepo;
+    private final UserRepository uRepo;
 
     public ReturnMsg insertCart(Cart cart) {
         log.info("insertCart()");
@@ -42,44 +43,24 @@ public class CartService {
         return rm;
     }
 
-    public List<Cart> cartList() {
+    public List<Cart> cartList(String cuid) {
         log.info("cartList()");
-        return cRepo.findAll();
+        User user = new User();
+        user.setUid(cuid);
+        return cRepo.findByCuid(user);
     }
 
-    public Cart cartSearch(long cno) {
-        log.info("cartSearch()");
-        return cRepo.findById(cno).get();
-    }
+    public ReturnMsg cartUpdate(Cart cart) {
+        log.info("cartUpdate()");
+        ReturnMsg rm = new ReturnMsg();
+        rm.setFlag(false);
+        try{
 
-//    public ReturnMsg cartUpdate(Cart cart) {
-//        log.info("cartUpdate()");
-//        ReturnMsg rm = new ReturnMsg();
-//        rm.setFlag(false);
-//
-//        try{
-//
-//            Cart c = cRepo.findById(cart.getC_no()).get();
-//            if(c.equals(null)){
-//                rm.setFlag(false);
-//                rm.setMsg("데이터가 없습니다.");
-//                return rm;
-//            }
-//        c.setC_shot(cart.getC_shot());
-//        c.setC_syrup(cart.getC_syrup());
-//        c.setC_whipping(cart.getC_whipping());
-//        c.setC_mcount(cart.getC_mcount());
-//        c.setC_comp(cart.isC_comp());
-//        cRepo.save(c);
-//        rm.setFlag(true);
-//        rm.setMsg("수정 성공하였습니다.");
-//        }catch(Exception e){
-//        e.printStackTrace();
-//        rm.setFlag(false);
-//        rm.setMsg("수정 실패하였습니다.");
-//
-//        }
-//
-//        return rm;
-//    }
+
+        }catch(Exception e){
+            e.printStackTrace();
+
+        }
+        return rm;
+    }
 }

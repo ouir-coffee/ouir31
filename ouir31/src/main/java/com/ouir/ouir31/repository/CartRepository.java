@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface CartRepository extends CrudRepository<Cart, Long> {
 
-    List<Cart> findAll();
+    List<Cart> findByCuid(User cuid);
 }

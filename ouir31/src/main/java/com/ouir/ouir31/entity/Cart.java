@@ -19,7 +19,7 @@ public class Cart {
 
     @Column(nullable = false)
     @ColumnDefault("1")
-    private int cmenuCount;
+    private int cmenucount;
 
     @Column(nullable = false)
     @ColumnDefault("0")
@@ -40,5 +40,6 @@ public class Cart {
     @ManyToOne
     @JoinColumn(name = "cuid")
     private User cuid;
+
 
 }
