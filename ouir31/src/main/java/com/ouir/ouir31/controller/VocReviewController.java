@@ -1,6 +1,6 @@
 package com.ouir.ouir31.controller;
 
-import com.ouir.ouir31.entity.ReturnMsg;
+import com.ouir.ouir31.dto.ReturnMsg;
 import com.ouir.ouir31.entity.VocReview;
 import com.ouir.ouir31.service.VocReviewService;
 import lombok.extern.java.Log;

@@ -1,6 +1,7 @@
 package com.ouir.ouir31.service;
 
-import com.ouir.ouir31.entity.ReturnMsg;
+
+import com.ouir.ouir31.dto.ReturnMsg;
 import com.ouir.ouir31.entity.Voc;
 import com.ouir.ouir31.entity.VocReview;
 import com.ouir.ouir31.repository.VocRepository;
