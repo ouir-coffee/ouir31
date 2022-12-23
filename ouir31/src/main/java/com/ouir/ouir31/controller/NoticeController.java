@@ -2,16 +2,22 @@ package com.ouir.ouir31.controller;
 
 import com.ouir.ouir31.entity.Notice;
 import com.ouir.ouir31.dto.ReturnMsg;
+import com.ouir.ouir31.entity.NoticeFile;
 import com.ouir.ouir31.service.NoticeService;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -23,17 +29,16 @@ public class NoticeController {
 
     @GetMapping("/notice/write")
     @ResponseBody
-    public boolean noticeWrite(Notice notice,HttpSession session){
+    public ReturnMsg noticeWrite(Notice notice, List<MultipartFile> files, HttpSession session){
         log.info("noticeWrite()");
-        boolean result = nServ.noticeWrite(notice,session);
-        return result;
+        return nServ.noticeWrite(notice,files,session);
     }
 
     @PostMapping("/notice/update")
     @ResponseBody
-    public ReturnMsg noticeUpdate(Notice notice,HttpSession session){
+    public ReturnMsg noticeUpdate(Notice notice,List<MultipartFile> files, HttpSession session){
         log.info("noticeUpdate()");
-        return nServ.noticeUpdate(notice,session);
+        return nServ.noticeUpdate(notice,files,session);
     }
 
     @PostMapping("/notice/delete")
@@ -45,9 +50,21 @@ public class NoticeController {
 
     @GetMapping("/notice/list")
     @ResponseBody
-    public List<Notice> noticeList(){
-        log.info("noticeList");
-        return nServ.noticeList();
+    public List<Notice> getNoticeList(Model model, Integer pageNum, HttpSession session){
+        log.info("getNoticeList");
+        return (List<Notice>) nServ.getNoticeList(model,pageNum,session);
+    }
+
+    @GetMapping("/notice/download")
+    public ResponseEntity<Resource> fileDownload(NoticeFile noticeFile, HttpSession session)
+            throws IOException {
+        ResponseEntity<Resource> resp = nServ.fileDownload(noticeFile, session);
+        return resp;
+    }
+
+    @GetMapping("/notice/filetest")
+    public List<NoticeFile> getNotice(long nno){
+        return nServ.getNotice(nno);
     }
 
 

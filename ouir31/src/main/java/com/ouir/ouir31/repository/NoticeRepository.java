@@ -10,5 +10,7 @@ import java.util.List;
 public interface NoticeRepository extends CrudRepository<Notice, Long> {
 
     List<Notice> findAll();
+
+    Notice findById(long nno);
     Page<Notice> findByNnoGreaterThan(long nno, Pageable pageable);
 }

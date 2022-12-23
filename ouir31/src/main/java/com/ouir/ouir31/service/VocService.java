@@ -1,8 +1,7 @@
 package com.ouir.ouir31.service;
 
-import com.ouir.ouir31.entity.User;
-import com.ouir.ouir31.entity.Voc;
-import com.ouir.ouir31.entity.VocFile;
+import com.ouir.ouir31.dto.ReturnMsg;
+import com.ouir.ouir31.entity.*;
 import com.ouir.ouir31.repository.UserRepository;
 import com.ouir.ouir31.repository.VocFileRepository;
 import com.ouir.ouir31.repository.VocRepository;
@@ -21,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -44,36 +44,35 @@ public class VocService {
     private VocFileRepository vfRepo;
 
 
-    private ModelAndView mv = new ModelAndView();
 
     //페이징
-    private String getPaging(int pageNum, int totalPage) {
-        String pageHtml = null;
-        int pageCnt = 5;
-        String listName = "?";
-        PagingUtil paging = new PagingUtil(totalPage, pageNum, pageCnt, listName);
-        pageHtml = paging.makePaging();
-        return pageHtml;
-    }
+//    private String getPaging(int pageNum, int totalPage) {
+//        String pageHtml = null;
+//        int pageCnt = 5;
+//        String listName = "?";
+//        PagingUtil paging = new PagingUtil(totalPage, pageNum, pageCnt, listName);
+//        pageHtml = paging.makePaging();
+//        return pageHtml;
+//    }
 
 
     @Transactional
     //Voc 글작성
-    public String insertVoc(List<MultipartFile> files, Voc voc, HttpSession session, RedirectAttributes rttr) {
-        String view = null;
-        String msg = null;
+    public ReturnMsg writeVoc(List<MultipartFile> files, Voc voc, HttpSession session) {
+        ReturnMsg rm = new ReturnMsg();
+        rm.setFlag(false);
+
         try {
             vRepo.save(voc);
             fileUpload(files, session, voc);
-            msg = "저장완료";
-            view = "redirect:list";
+            rm.setFlag(true);
+            rm.setMsg("등록되었습니다");
         } catch (Exception e) {
             e.printStackTrace();
-            msg = "실패";
-            view = "redirect:list";
+            rm.setFlag(false);
+            rm.setMsg("예기치 않은 오류가 발생하였습니다. 다시 시도해주세요.");
         }
-        rttr.addFlashAttribute("msg", msg);
-        return view;
+        return rm;
     }
 
     //Voc 파일 업로드
@@ -126,42 +125,42 @@ public class VocService {
 
 
     //voc 문의글 상세내용 가져오기
-    public ModelAndView getVoc(long vocno) {
-        log.info("getVoc");
-        mv = new ModelAndView();
-
-        Voc voc = vRepo.findById(vocno).get();
-        mv.addObject("voc", voc);
-
-        //첨부파일 가져오기
-        List<VocFile> vfList = vfRepo.findByvfid(voc);
-        mv.addObject("vfList", vfList);
-        return mv;
-    }
+//    public ModelAndView getVoc(long vocno) {
+//        log.info("getVoc");
+//        mv = new ModelAndView();
+//
+//        Voc voc = vRepo.findById(vocno).get();
+//        mv.addObject("voc", voc);
+//
+//        //첨부파일 가져오기
+//        List<VocFile> vfList = vfRepo.findByvfid(voc);
+//        mv.addObject("vfList", vfList);
+//        return mv;
+//    }
 
 
     //전체 voc 리스트 출력(관리자용)
-    public ModelAndView getVocList(Integer PageNum, HttpSession session) {
-        log.info("getVocList");
-        mv = new ModelAndView();
-
-        if (PageNum == null) {
-            PageNum = 1;
-        }
-        int listCnt = 5;
-        Pageable pb = PageRequest.of((PageNum - 1), listCnt, Sort.Direction.DESC, "vocno");
-        Page<Voc> result = vRepo.findByVocnoGreaterThan(0L, pb);
-        List<Voc> vocList = result.getContent();
-        int totalPage = result.getTotalPages();
-
-        String paging = getPaging(PageNum, totalPage);
-        mv.addObject("vocList", vocList);
-        mv.addObject("paging", paging);
-
-        session.setAttribute("pageNum", PageNum);
-
-        return mv;
-    }
+//    public List<Voc> getVocList(Integer PageNum, HttpSession session) {
+//        log.info("getVocList");
+//        mv = new ModelAndView();
+//
+//        if (PageNum == null) {
+//            PageNum = 1;
+//        }
+//        int listCnt = 5;
+//        Pageable pb = PageRequest.of((PageNum - 1), listCnt, Sort.Direction.DESC, "vocno");
+//        Page<Voc> result = vRepo.findByVocnoGreaterThan(0L, pb);
+//        List<Voc> vocList = result.getContent();
+//        int totalPage = result.getTotalPages();
+//
+//        String paging = getPaging(PageNum, totalPage);
+//        mv.addObject("vocList", vocList);
+//        mv.addObject("paging", paging);
+//
+//        session.setAttribute("pageNum", PageNum);
+//
+//        return mv;
+//    }
 
     //개인 voc 출력
 //    public ModelAndView getMyVoc(Integer PageNum, HttpSession session,
@@ -199,59 +198,101 @@ public class VocService {
 
 @Transactional
     //문의 수정
-    public String vocUpdate(List<MultipartFile> files, Voc voc, HttpSession session, RedirectAttributes rttr) {
-        String msg = null;
-        String view = null;
+public ReturnMsg vocUpdate(List<MultipartFile> files, Voc voc, HttpSession session){
+    log.info("vocUpdate()");
+    ReturnMsg rm = new ReturnMsg();
+    rm.setFlag(false);
 
-        try {
-            vRepo.save(voc);
-            fileUpload(files, session, voc);
-            msg = "수정성공";
-            view = "redirect:detail?bnum=" + voc.getVocno();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        rttr.addFlashAttribute("msg", msg);
-        return view;
+    try {
+        vRepo.save(voc);
+        rm.setFlag(true);
+        rm.setMsg("수정되었습니다.");
+    }catch (Exception e){
+        e.printStackTrace();
+        rm.setFlag(false);
+        rm.setMsg("예기치 않은 오류가 발생하였습니다. 다시 시도해주세요.");
     }
+    return rm;
+}
 
 // voc 삭제
-    @Transactional
-    public String vocDelete(long vocno, HttpSession session, RedirectAttributes rttr) {
-    String msg = null;
-    String view = null;
+public ReturnMsg vocDelete(long vocno,HttpSession session){
+    log.info("vocDelete()");
+    ReturnMsg rm = new ReturnMsg();
+    rm.setFlag(false);
 
-     Voc voc = new Voc();
-     voc.setVocno(vocno);
-     List<VocFile> vfList = vfRepo.findByvfid(voc);
+   Voc voc = new Voc();
+    voc.setVocno(vocno);
 
-     String realPath = session.getServletContext().getRealPath("/");
-     realPath += "upload/";
+    String realPath = session.getServletContext().getRealPath("/");
+    realPath += "upload/";
 
-     try {
-         for (VocFile vf : vfList){
-             String delPath = realPath + vf.getVfsysname();
-             File file = new File(delPath);
-            //파일이 존재하면 삭제
-             if (file.exists()){
-                 file.delete();
-             }
-         }
-         //파일정보 삭제
-         vfRepo.deleteByvfid(voc);
-        //글 삭제
-         vRepo.deleteById(vocno);
-         msg = "삭제성공";
-         view = "redirect:list";
-     } catch (Exception e) {
-         e.printStackTrace();
-         msg = "삭제실패";
-         view = "redirect:list";
-     }
-     rttr.addFlashAttribute("msg", msg);
+    List<VocFile> vfList = vfRepo.findByvfid(voc);
 
-     return view;
+    try {
+        for (VocFile vf : vfList){
+            String delPath = realPath + vf.getVfsysname();
+            File file = new File(delPath);
+
+            if(file.exists()){
+                file.delete();
+            }
+        }
+        vfRepo.deleteByvfid(voc);
+        vRepo.deleteById(vocno);
+        rm.setFlag(true);
+        rm.setMsg("삭제되었습니다.");
+    }catch (Exception e){
+        e.printStackTrace();
+        rm.setFlag(false);
+        rm.setMsg("예기치 않은 오류가 발생하였습니다. 다시 시도해주세요.");
+    }
+    return rm;
+}
+
+//voc 가져오기
+public List<VocFile> getVoc(long vocno){
+        log.info("getVoc()");
+        Voc voc = vRepo.findById(vocno);
+
+        List<VocFile> vfList = vfRepo.findByvfid(voc);
+        return vfList;
+}
+
+    private String getPaging(Integer pageNum, int totalPage) {
+        String pageHtml = null;
+        int pageCnt = 5;
+        String listName = "voc";
+
+        PagingUtil paging = new PagingUtil(totalPage, pageNum, pageCnt, listName);
+        pageHtml = paging.makePaging();
+
+        return pageHtml;
+    }
+
+
+    //voc 리스트 출력
+    public List<Voc> getVocList(Model model, Integer pageNum, HttpSession session){
+        log.info("getVocList()");
+
+        if(pageNum == null){
+            pageNum = 1;
+        }
+        int listCnt = 5;
+        Pageable pb = PageRequest.of((pageNum -1),listCnt, Sort.Direction.DESC,"vocno");
+
+        Page<Voc> result = vRepo.findByVocnoGreaterThan(0L,pb);
+        List<Voc> vList = result.getContent();
+        int totalPage = result.getTotalPages();
+
+        String paging = getPaging(pageNum,totalPage);
+
+        model.addAttribute("vList", vList);
+        model.addAttribute("paging", paging);
+
+        session.setAttribute("pageNum",pageNum);
+
+        return (List<Voc>) model;
     }
 
 

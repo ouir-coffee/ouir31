@@ -11,6 +11,6 @@ public interface VocRepository extends CrudRepository<Voc,Long> {
 
     Page<Voc> findByVocnoGreaterThan(long vocno, Pageable pb);
 
+    Voc findById(long vocno);
 
-//    Iterable<Voc> findByVocuid();
 }

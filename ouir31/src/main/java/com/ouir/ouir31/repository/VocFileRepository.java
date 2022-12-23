@@ -11,5 +11,6 @@ import java.util.List;
 public interface VocFileRepository extends CrudRepository<VocFile, Long> {
     List<VocFile> findByvfid(Voc voc);
 
+
     void deleteByvfid(Voc voc);
 }
