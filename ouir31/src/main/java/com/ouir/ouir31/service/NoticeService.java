@@ -161,7 +161,7 @@ public class NoticeService {
 
         session.setAttribute("pageNum",pageNum);
 
-        return model; //////////수정해야함
+        return model;
     }
 
     //공지 파일 다운로드
