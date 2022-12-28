@@ -1,64 +1,58 @@
 package com.ouir.ouir31.controller.MenuOption;
 
-import com.ouir.ouir31.entity.MenuOption.Menu;
 import com.ouir.ouir31.dto.ReturnMsg;
-import com.ouir.ouir31.entity.MenuOption.MenuCategories;
+import com.ouir.ouir31.entity.MenuOption.Menu;
 import com.ouir.ouir31.service.MenuOption.MenuService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
-@RequestMapping("/menu")
 @RequiredArgsConstructor
 @Log
+@RequestMapping("/menu")
 public class MenuController {
     private final MenuService mServ;
 
-    // Menu Insert ( 메뉴 작성 )
+    // 메뉴 저장
     @PostMapping("")
-    public ReturnMsg menuInsert(Menu menu, int mc_code){
+    public ReturnMsg menuInsert(@RequestPart(value = "data", required = true) Menu menu,
+                                @RequestPart(value = "files", required = false)List<MultipartFile> files,
+                                HttpSession session){
         log.info("menuInsert()");
-        return mServ.menuInsert(menu, mc_code);
+        return mServ.menuInsert(menu, files, session);
     }
 
-    // Menu List ( 메뉴 전체 출력 )
-    @GetMapping("/list")
+
+    // 메뉴 전체 출력
+    @GetMapping("")
     public List<Menu> menuList(){
         log.info("menuList()");
-        return mServ.getMenuList();
+        return mServ.menuList();
     }
 
-    // Menu Search ( 메뉴 개별 출력 )
+    // 메뉴 개별 출력
     @GetMapping("/search")
-    public Menu menuSearch(int mno){
+    public Menu menuSearch(String mitem){
         log.info("menuSearch()");
-        return mServ.menuSearch(mno);
+        return mServ.menuSearch(mitem);
     }
 
-    // Menu Update ( 메뉴 수정 )
+    // 메뉴 업데이트
     @PutMapping("")
     public ReturnMsg menuUpdate(Menu menu){
         log.info("menuUpdate()");
         return mServ.menuUpdate(menu);
     }
 
-    // Menu Delete ( 메뉴 삭제 )
+    // 메뉴 삭제
     @DeleteMapping("")
-    public ReturnMsg menuDelete(int mno){
-        log.info("menuDelete()");
-        return mServ.menuDelete(mno);
+    public ReturnMsg menuDelete(String mitem){
+        log.info("menuDelete");
+        return mServ.menuDelete(mitem);
     }
-
-
-    // 메뉴 카테고리 insert
-    @PostMapping("/categories")
-    public boolean menuCategories(MenuCategories menuCategories){
-        log.info("menuCategories()");
-        boolean result = mServ.mcInsert(menuCategories);
-        return result;
-    }
-
 }

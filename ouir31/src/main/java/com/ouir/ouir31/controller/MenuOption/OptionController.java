@@ -1,9 +1,7 @@
 package com.ouir.ouir31.controller.MenuOption;
 
 import com.ouir.ouir31.dto.ReturnMsg;
-import com.ouir.ouir31.entity.MenuOption.MenuCategories;
 import com.ouir.ouir31.entity.MenuOption.Option;
-import com.ouir.ouir31.entity.MenuOption.OptionCategories;
 import com.ouir.ouir31.service.MenuOption.OptionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -20,22 +18,22 @@ public class OptionController {
 
     // Option Insert ( 옵션 추가 )
     @PostMapping("")
-    private ReturnMsg optionInsert(Option option, int oc_code){
+    private ReturnMsg optionInsert(Option option){
         log.info("optionInsert()");
-        return oServ.optionInsert(option, oc_code);
+        return oServ.optionInsert(option);
     }
 
     // Option List ( 옵션 전체 출력 )
-    @GetMapping("/list")
+    @GetMapping("")
     private List<Option> optionList(){
         log.info("optionList()");
         return oServ.optionList();
     }
     // Option Search ( 옵션 개별 출력 )
     @GetMapping("/search")
-    private Option optionSearch(int ono){
+    private Option optionSearch(String oitem){
         log.info("optionSearch()");
-        return oServ.optionSearch(ono);
+        return oServ.optionSearch(oitem);
     }
 
     // Option Update ( 옵션 수정 )
@@ -47,16 +45,10 @@ public class OptionController {
 
     // Option Delete ( 옵션 삭제 )
     @DeleteMapping("")
-    private ReturnMsg optionDelete(int ono){
+    private ReturnMsg optionDelete(String oitem){
         log.info("optionDelete()");
-        return oServ.optionDelete(ono);
+        return oServ.optionDelete(oitem);
     }
 
-    // 옵션 카테고리 Insert
-    @PostMapping("/categories")
-    public boolean optionCategories(OptionCategories optionCategories) {
-        log.info("optionCategories()");
-        return oServ.optionCategories(optionCategories);
-    }
 
 }

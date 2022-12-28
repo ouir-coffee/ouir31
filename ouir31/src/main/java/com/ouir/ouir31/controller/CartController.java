@@ -1,7 +1,7 @@
 package com.ouir.ouir31.controller;
 
-import com.ouir.ouir31.entity.CartOrder.Cart;
 import com.ouir.ouir31.dto.ReturnMsg;
+import com.ouir.ouir31.entity.Cart;
 import com.ouir.ouir31.service.CartService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -17,17 +17,23 @@ import java.util.List;
 public class CartController {
     private final CartService cServ;
 
-
     @PostMapping("")
-    public ReturnMsg cartWrite(Cart cart){
-        log.info("cartWrite()");
-        return cServ.insertCart(cart);
+    public ReturnMsg cartInsert(Cart cart){
+        log.info("cartInsert()");
+        return cServ.cartInsert(cart);
     }
 
     @GetMapping("")
-    public List<Cart> cartList(String cuid){
+    public List<Cart> cartList(){
         log.info("cartList()");
-        return cServ.cartList(cuid);
+        return cServ.cartList();
+    }
+
+    //개인 장바구니
+    @GetMapping("/search")
+    public List<Cart> cartSearch(String cuid){
+        log.info("cartSearch()");
+        return cServ.cartSearch(cuid);
     }
 
     @PutMapping("")
@@ -35,4 +41,11 @@ public class CartController {
         log.info("cartUpdate()");
         return cServ.cartUpdate(cart);
     }
+
+    @DeleteMapping("")
+    public ReturnMsg cartDelete(long cno){
+        log.info("cartDelete()");
+        return cServ.cartDelete(cno);
+    }
+
 }

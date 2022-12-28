@@ -1,102 +1,92 @@
 package com.ouir.ouir31.service.MenuOption;
 
-import com.ouir.ouir31.entity.MenuOption.Menu;
 import com.ouir.ouir31.dto.ReturnMsg;
-import com.ouir.ouir31.entity.MenuOption.MenuCategories;
-import com.ouir.ouir31.repository.MenuOption.MenuCateRepository;
+import com.ouir.ouir31.entity.MenuOption.Menu;
+import com.ouir.ouir31.entity.MenuOption.MenuFiles;
+import com.ouir.ouir31.repository.MenuOption.MenuFilesRepository;
 import com.ouir.ouir31.repository.MenuOption.MenuRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 @Log
+@RequiredArgsConstructor
 public class MenuService {
     private final MenuRepository mRepo;
-    private final MenuCateRepository mcRepo;
+    private final MenuFilesRepository mfRepo;
     private final ReturnMsg rm = new ReturnMsg();
 
-    // Menu Insert ( 메뉴 작성 )
-    public ReturnMsg menuInsert(Menu menu, int mc_code) {
+    // 메뉴 저장
+    public ReturnMsg menuInsert(Menu menu, List<MultipartFile> files, HttpSession session) {
         log.info("menuInsert()");
-        rm.setFlag(false);
         try{
-            // 카테고리에서의 No를 menu 외래키에 저장.
-            menu.setMenuCategories(mcRepo.findById(mc_code).get());
             mRepo.save(menu);
+            if(files != null){
+                fileUpload(files,session,menu.getMitem());
+            }
             rm.setFlag(true);
-            rm.setMsg("Menu 작성 완료");
+
         }catch(Exception e){
             e.printStackTrace();
             rm.setFlag(false);
         }
         return rm;
+    }
+
+    private void fileUpload(List<MultipartFile> files, HttpSession session, String mitem) throws Exception{
+
+        String realPath = session.getServletContext().getRealPath("/");
+        log.info("realPath : " + realPath);
+        realPath += "upload/";
+        File folder = new File(realPath);
+        if(!folder.isDirectory()){
+            folder.mkdir();
+        }
+        for(MultipartFile file : files) {
+            String orname = file.getOriginalFilename();
+            if(orname.equals("")){
+                return;
+            }
+            MenuFiles mf = new MenuFiles();
+            mf.setMfmitem(mitem);
+            mf.setMforiname(orname);
+            String sysname = System.currentTimeMillis() + orname.substring(orname.lastIndexOf("."));
+            mf.setMfsysname(sysname);
+            File saveFile = new File(realPath + sysname);
+            file.transferTo(saveFile);
+
+            mfRepo.save(mf);
+        }
 
     }
 
-    // Menu List ( 메뉴 전체 출력 )
-    public List<Menu> getMenuList() {
-        log.info("getMenuList()");
+    // 메뉴 전체 출력
+    public List<Menu> menuList() {
+        log.info("menuList()");
         return mRepo.findAll();
     }
 
-    // Menu Search ( 메뉴 개별 출력 )
-    public Menu menuSearch(int mno) {
+    // 메뉴 개별 출력
+    public Menu menuSearch(String mitem) {
         log.info("menuSearch()");
-        return mRepo.findById(mno);
+
+        Menu menu = mRepo.findByMitem(mitem);
+        List<MenuFiles> mfList = mfRepo.findByMfmitem(menu.getMitem());
+        menu.setMfList(mfList);
+        return mRepo.findByMitem(mitem);
     }
 
-
-    // Menu Update ( 메뉴 수정 )
+    // 메뉴 업데이트
     public ReturnMsg menuUpdate(Menu menu) {
         log.info("menuUpdate()");
-        rm.setFlag(false);
         try{
-            Menu m = mRepo.findById(menu.getMno());
-            if(m == null){
-                rm.setFlag(false);
-                rm.setMsg("데이터가 없습니다.");
-                return rm;
-            }
-            if(menu.getMitem() == null){
-            m.setMitem(mRepo.findById(menu.getMno()).getMitem());
-            } else {
-                m.setMitem(menu.getMitem());
-            }
-            if(menu.getMprice() == 0){
-                m.setMprice(mRepo.findById(menu.getMno()).getMprice());
-            } else {
-                m.setMprice(menu.getMprice());
-            }
-            mRepo.save(m);
-            rm.setFlag(true);
-            rm.setMsg("수정 성공하였습니다.");
-        }catch(Exception e ){
-            e.printStackTrace();
-            rm.setFlag(false);
-            rm.setMsg("수정 실패하였습니다.");
-        }
-
-        return rm;
-    }
-
-    // Menu Delete ( 메뉴 삭제 )
-    public ReturnMsg menuDelete(int mno) {
-        log.info("menuDelete()");
-        rm.setFlag(false);
-
-        try{
-            Menu menu = mRepo.findById(mno);
-            if(menu == null){
-                rm.setMsg("데이터가 없습니다.");
-                rm.setFlag(false);
-                return rm;
-            }
-            mRepo.deleteById(mno);
-            rm.setMsg(mno + " 번이 삭제되었습니다.");
+            mRepo.save(menu);
             rm.setFlag(true);
         }catch(Exception e){
             e.printStackTrace();
@@ -105,19 +95,17 @@ public class MenuService {
         return rm;
     }
 
-    // 메뉴 카테고리 insert
-    public boolean mcInsert(MenuCategories menuCategories) {
-        log.info("mcInsert()");
-        boolean result = false;
-
+    // 메뉴 삭제
+    public ReturnMsg menuDelete(String mitem) {
+        log.info("menuDelete()");
+        rm.setFlag(false);
         try{
-        mcRepo.save(menuCategories);
-            result = true;
+            mRepo.deleteById(mitem);
+            rm.setFlag(true);
         }catch (Exception e){
             e.printStackTrace();
-            result = false;
+            rm.setFlag(false);
         }
-        return result;
+        return rm;
     }
-
 }

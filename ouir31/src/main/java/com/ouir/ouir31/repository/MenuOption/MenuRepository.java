@@ -4,10 +4,10 @@ import com.ouir.ouir31.entity.MenuOption.Menu;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface MenuRepository extends CrudRepository<Menu, Integer> {
+public interface MenuRepository extends CrudRepository<Menu, String> {
 
     List<Menu> findAll();
-    Menu findById(int mno);
+    Menu findByMitem(String mitem);
+
 }
