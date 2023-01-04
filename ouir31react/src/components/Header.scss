@@ -3,8 +3,9 @@
     color: #13541D;
     padding: 10px;
     margin: 0;
-    height: 100px;
-    line-height: 100px;
+    height: 150px;
+    line-height: 150px;
+    // position: relative;
 
     .Content {
         width: 1000px;
@@ -37,13 +38,63 @@
         }
     }
     
-    .IconStyle {
-        color: #13541D;
-        margin-top: 10px;
-    }
-    
     .LogoStyle {
-        margin-top: 25px;
+        margin-top: 50px;
         width: 50px;
+        height: 50px;
+        justify-content: flex-start;
+        cursor: pointer;
     }
 }
+
+nav {
+    
+    .Menubar {
+        background-color: #FBFBF0;
+        width: 800px;
+        height: 60px;
+        line-height: 60px;
+        margin: 0 auto;   
+    }
+    
+    .Menulist {
+        background-color: #FBFBF0;
+        color: #13541D;
+        margin: 0 auto;
+        display: flex;
+        list-style:none;
+        justify-content: space-between;
+        font-weight: bold;
+        // margin-right: 40px;
+        // cursor: pointer;
+    }
+    
+    li {
+        cursor: pointer;
+    }
+
+    &.active {
+       
+        li>div {
+            font-weight: normal;
+            text-align: center;
+            position: relative;
+            line-height: 30px;
+        }
+
+        background-color:#FBFBF0;
+        color:#13541D;
+        width: 800px;
+        height: 200px;
+        line-height: 10px;
+        display: flex;
+        margin: 0 auto;
+
+    }
+}
+
+
+
+
+
+
