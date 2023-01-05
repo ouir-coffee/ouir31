@@ -22,7 +22,6 @@ import java.util.List;
 public class CartService {
     private final CartRepository cRepo;
     private final MenuRepository mRepo;
-    private final UserRepository uRepo;
     private final OptionRepository oRepo;
     private final ReturnMsg rm = new ReturnMsg();
 

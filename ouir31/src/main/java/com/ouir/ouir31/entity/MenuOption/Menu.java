@@ -14,6 +14,9 @@ public class Menu {
     @Column(nullable = false, length = 20)
     private String mitem;
 
+    @Column(nullable = false, length = 150)
+    private String mcontents;
+
     @Column(nullable = false)
     private int mprice;
 

@@ -1,0 +1,25 @@
+.slide_btn {
+  width: 26px;
+  height: 43px;
+  margin-top: 0;
+  position: absolute;
+  top: 50%;
+
+  img {
+    width: 100%;
+  }
+}
+
+.prev_btn {
+  left: 10px;
+  right: auto;
+  z-index: 999;
+  cursor: pointer;
+}
+
+.next_btn {
+  right: 10px;
+  left: auto;
+  z-index: 999;
+  cursor: pointer;
+}
