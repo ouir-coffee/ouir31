@@ -1,0 +1,20 @@
+.menu_slider {
+  margin-bottom: 80px;
+  padding: 0 50px;
+  position: relative;
+
+  .best_item {
+    display: flex;
+    width: 350px * 6;
+    z-index: 1;
+    transition-duration: 500ms;
+
+    li {
+      box-sizing: border-box;
+      width: 350px;
+      float: left;
+      position: relative;
+      cursor: pointer;
+    }
+  }
+}

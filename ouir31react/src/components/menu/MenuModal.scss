@@ -1,0 +1,25 @@
+.MenuStyle {
+  width: 100%;
+  .Content {
+    margin: 10px;
+    input {
+      font-size: medium;
+      display: flex;
+      width: 500px;
+      height: 50px;
+      margin-bottom: 10px;
+    }
+    select {
+      font-size: medium;
+      display: flex;
+      width: 510px;
+      height: 50px;
+      margin-bottom: 10px;
+      color: gray;
+
+      option {
+        height: 100px;
+      }
+    }
+  }
+}

@@ -8,7 +8,7 @@ const Item = (props) => {
     setIsActive((current) => !current);
   };
   return (
-    <li onClick={showBlock}>
+    <li className="list_item" onClick={showBlock}>
       <div className="thumb">
         <img src={imgUrl} alt="img" />
       </div>
