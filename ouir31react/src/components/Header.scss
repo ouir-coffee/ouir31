@@ -1,100 +1,72 @@
 .Header {
     background: #FBFBF0;
     color: #13541D;
-    padding: 10px;
     margin: 0;
-    height: 150px;
-    line-height: 150px;
-    // position: relative;
-
+    position: relative;
+    
     .Content {
-        width: 1000px;
+        width: 100%;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
     }
-
-    .Title {
-        margin: 0;
-        font-size: 2rem;
-        font-weight: bold;
-        padding-left: 150px;
+    
+    .Logo {
+        margin: auto;
     }
-
+    
+    .Logostyle {
+        margin: auto;
+        padding-left: 50px;
+        width: 150px;
+        height: 75px;
+        cursor: pointer;
+    }
+    
     .Menu{
         display: flex;
         justify-content: flex-end;
-        width: 200px;
+        // margin: auto;
         .Item {
-            margin: 0 10px;            
+            margin: auto;
+            padding-top: 40px;
+            padding-right: 5px;
             a {
                 text-decoration: none;
                 color: #13541D;
-                font-weight: bold;
-            }
-            span {
-                cursor: pointer;
+                font-weight: normal;
+                font-size: small;
             }
         }
-    }
-    
-    .LogoStyle {
-        margin-top: 50px;
-        width: 50px;
-        height: 50px;
-        justify-content: flex-start;
-        cursor: pointer;
-    }
-}
-
-nav {
-    
-    .Menubar {
-        background-color: #FBFBF0;
-        width: 800px;
-        height: 60px;
-        line-height: 60px;
-        margin: 0 auto;   
-    }
-    
-    .Menulist {
-        background-color: #FBFBF0;
-        color: #13541D;
-        margin: 0 auto;
-        display: flex;
-        list-style:none;
-        justify-content: space-between;
-        font-weight: bold;
-        // margin-right: 40px;
-        // cursor: pointer;
-    }
-    
-    li {
-        cursor: pointer;
-    }
-
-    &.active {
-       
-        li>div {
-            font-weight: normal;
-            text-align: center;
-            position: relative;
-            line-height: 30px;
-        }
-
-        background-color:#FBFBF0;
-        color:#13541D;
-        width: 800px;
-        height: 200px;
-        line-height: 10px;
-        display: flex;
-        margin: 0 auto;
-
     }
 }
 
 
+//메뉴목록!
+ul,li {list-style: none;}
 
+a {text-decoration: none; color: #13541D; display: block;}
 
+.Menubar {
+    width: 100%;
+    margin: 0 auto;
+    height: 0;
+}
 
+.Menulist {
+    width: 700px;
+    line-height: 75px;
+    color: #13541D;
+    margin: 0 auto;
+    display: flex;
+    font-weight: bold;
+    text-align: center;
+    padding: 0;
+    padding-top: 20px;
+    justify-content: space-between;
+}
 
+.Menulist>li {
+    margin: 0 auto;
+    position: relative;
+}

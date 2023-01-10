@@ -1,0 +1,18 @@
+.Input {
+    width: 80%;
+    height: 2.5rem;
+    font-size: 1.25rem;
+    line-height: 2.5rem;
+    border: none;
+    background: #ffffff;
+    text-align: center;
+    font-family: "Hahmlet";
+
+    &::placeholder {
+        color: dimgray;
+    }
+
+    &+&, &+.Button, .Button+& {
+        margin-top: 1rem;
+    }    
+}
