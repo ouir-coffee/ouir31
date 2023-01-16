@@ -2,13 +2,22 @@ import React from "react";
 import "./Header.scss";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+
+const Header = ({ lstate, onLogout }) => {
   // const [view, setView] = useState(false); //메뉴 접기
   const home = "/";
   const about = "/about";
   const menu = "/menu";
   const notice = "/notice";
   const voc = "/voc";
+  const myPage = "/mypage"
+  //로그인 정의
+  const { logid, flink } = lstate;
+  //로고 클릭(로그인 후 main, 로그인 전 home)
+  // console.log(JSON.parse(logid))
+  // console.log(JSON.stringify(logid))
+
+
 
   return (
     <div className="Header">
@@ -27,10 +36,17 @@ const Header = () => {
         </nav>
         <div className="Menu">
           <div className="Item">
-            <Link>로그인정보</Link>
+            <Link to={flink}>{logid !== "" ? `${logid}님` : "로그인"}</Link>
           </div>
           <div className="Item">
-            <Link>회원가입</Link>
+            <Link to={myPage}>{logid !== "" ? "마이페이지" : ""}</Link>
+          </div>
+          <div className="Item">
+          {logid !== "" ? (
+              <span onClick={onLogout}>로그아웃</span>
+            ) : (
+              <Link to="/join">회원가입</Link>
+            )}
           </div>
         </div>
       </div>

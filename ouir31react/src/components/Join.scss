@@ -1,0 +1,43 @@
+.Join {
+    flex: 1;
+    min-height: 500px;
+    width: 800px;
+    margin: 10px auto;
+    height: 750px;
+    
+
+    .Content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 500px;
+        padding: 10px;
+        background: #FBFBF0;
+        margin: 1.5rem auto;
+        border-radius: 5px;
+        padding-bottom: 2rem;
+        top: 100px;
+        position: relative;
+    }
+}
+
+h1{
+    color: darkgreen;
+    position: relative;
+    bottom: 70px;
+
+}
+
+.message {
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -1px;
+    bottom: -10px;
+    left: 0;
+    &.success {
+      color: #8f8c8b;
+    }
+    &.error {
+      color: #ff2727;
+    }
+  }

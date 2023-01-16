@@ -42,6 +42,8 @@ $ouir1 : #13541D;
     cursor: pointer;
     justify-content: center;
     // font-family: "Hahmlet";
+    
+    
 
     //여기 부분을 단계별로 변경.
     &.large {
@@ -80,4 +82,20 @@ $ouir1 : #13541D;
     input + & {
         margin-top: 2rem;
     }
+    h1+& {
+        top: 100px;
+    }
+
+    &:disabled {
+        background: #495057;
+        color: #ffffff;
+        &:active {
+          background: #495057; // 버튼 미활성화 시 반응 x
+          color: #ffffff;
+        }
+        &:hover{
+            background: #495057; // 버튼 미활성화 시 반응 x
+            color: #ffffff;
+        }
+      }
 }

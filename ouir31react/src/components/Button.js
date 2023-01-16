@@ -15,7 +15,7 @@ const Button = ({ children, size, color, wsize, outline, ...rest }) => {
 
 Button.defaultProps = {
   size: "medium",
-  color: "blue",
+  color: "ouir1",
   wsize: "basic",
 };
 

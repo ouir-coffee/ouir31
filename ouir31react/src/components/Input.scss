@@ -1,7 +1,7 @@
 .Input {
     width: 80%;
     height: 2.5rem;
-    font-size: 1.25rem;
+    // font-size: 1.25rem;
     line-height: 2.5rem;
     border: none;
     background: #ffffff;
@@ -12,7 +12,7 @@
         color: dimgray;
     }
 
-    &+&, &+.Button, .Button+& {
+    &+&, &+.Button, .Button+&,&+div {
         margin-top: 1rem;
     }    
 }
