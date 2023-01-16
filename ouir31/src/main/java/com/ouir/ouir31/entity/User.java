@@ -3,11 +3,10 @@ package com.ouir.ouir31.entity;
 
 import lombok.Data;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 @Entity
@@ -18,19 +17,15 @@ public class User {
     @Column(nullable = false, length = 20)
     private String uid;
 
-    @Column(nullable = false, length = 70)
+    @Column(nullable = false, length = 200)
     private String upwd;
 
     @Column(nullable = false, length = 20)
     private String uname;
-
-    @Column(nullable = false, length = 50)
-    private String uadd;
 
     @Column(nullable = false, length = 40)
     private String uemail;
 
     @Column(nullable = false, length = 20)
     private String uphone;
-
 }
