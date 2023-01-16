@@ -7,5 +7,8 @@ import java.util.List;
 
 public interface MenuFilesRepository extends CrudRepository<MenuFiles,Integer> {
 
-    List<MenuFiles> findByMfmitem(String mitem);
+    MenuFiles findByMfmitem(String mitem);
+    MenuFiles findByMforiname(String mforiname);
+
+
 }

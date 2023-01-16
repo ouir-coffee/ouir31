@@ -16,7 +16,7 @@
 .modal > section {
   width: auto;
   margin: 0 auto;
-  border-radius: 0.3rem;
+  border-radius: 0.5rem;
   background-color: #fff;
   /* 팝업이 열릴때 스르륵 열리는 효과 */
   animation: modal-show 0.3s;
@@ -30,30 +30,19 @@
 }
 .modal > section > header button {
   position: absolute;
-  top: 15px;
+  top: 13px;
   right: 15px;
   width: 30px;
-  font-size: 21px;
+  font-size: 25px;
   font-weight: 700;
   text-align: center;
   color: #999;
   background-color: transparent;
 }
 .modal > section > main {
-  padding: 16px;
+  padding: 20px;
   border-bottom: 1px solid #dee2e6;
   border-top: 1px solid #dee2e6;
-}
-.modal > section > footer {
-  padding: 12px 16px;
-  text-align: right;
-}
-.modal > section > footer button {
-  padding: 6px 12px;
-  color: #fff;
-  background-color: #6c757d;
-  border-radius: 5px;
-  font-size: 13px;
 }
 .modal.openModal {
   display: flex;

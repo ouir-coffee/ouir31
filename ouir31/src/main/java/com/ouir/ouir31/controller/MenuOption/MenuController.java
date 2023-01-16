@@ -27,26 +27,19 @@ public class MenuController {
         return mServ.menuInsert(menu, files, session);
     }
 
-
-    // 메뉴 전체 출력
-    @GetMapping("")
-    public List<Menu> menuList(){
+    // 메뉴 카테고리별 출력
+    @GetMapping("/categories")
+    public List<Menu> menuList(@RequestParam String mcate){
         log.info("menuList()");
-        return mServ.menuList();
+        log.info("mCate : " + mcate);
+        return mServ.menuList(mcate);
     }
 
     // 메뉴 개별 출력
     @GetMapping("/search")
-    public Menu menuSearch(String mitem){
+    public Menu menuSearch(@RequestParam String mitem){
         log.info("menuSearch()");
         return mServ.menuSearch(mitem);
-    }
-
-    // 메뉴 업데이트
-    @PutMapping("")
-    public ReturnMsg menuUpdate(Menu menu){
-        log.info("menuUpdate()");
-        return mServ.menuUpdate(menu);
     }
 
     // 메뉴 삭제

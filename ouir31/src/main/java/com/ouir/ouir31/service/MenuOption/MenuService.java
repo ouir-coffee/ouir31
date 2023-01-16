@@ -10,8 +10,10 @@ import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,7 +42,7 @@ public class MenuService {
     }
 
     private void fileUpload(List<MultipartFile> files, HttpSession session, String mitem) throws Exception{
-
+        MenuFiles mfItem = mfRepo.findByMfmitem(mitem);
         String realPath = session.getServletContext().getRealPath("/");
         log.info("realPath : " + realPath);
         realPath += "upload/";
@@ -48,52 +50,72 @@ public class MenuService {
         if(!folder.isDirectory()){
             folder.mkdir();
         }
+
         for(MultipartFile file : files) {
             String orname = file.getOriginalFilename();
+            log.info("확인 : " + mfRepo.findByMforiname(orname));
             if(orname.equals("")){
                 return;
             }
-            MenuFiles mf = new MenuFiles();
-            mf.setMfmitem(mitem);
-            mf.setMforiname(orname);
-            String sysname = System.currentTimeMillis() + orname.substring(orname.lastIndexOf("."));
-            mf.setMfsysname(sysname);
-            File saveFile = new File(realPath + sysname);
-            file.transferTo(saveFile);
+            if(mfItem != null){
+                String delPath = realPath += mfItem.getMfsysname();
+                File fileData = new File(delPath);
 
-            mfRepo.save(mf);
+                if(fileData.exists()){
+                    fileData.delete(); //파일이 있으면 삭제
+                    realPath = session.getServletContext().getRealPath("/");
+                    realPath += "upload/";
+                }
+
+                mfItem.setMfno(mfItem.getMfno());
+                mfItem.setMfmitem(mitem);
+                mfItem.setMforiname(orname);
+                String sysname = System.currentTimeMillis() + orname.substring(orname.lastIndexOf("."));
+                mfItem.setMfsysname(sysname);
+                File saveFile = new File(realPath + sysname);
+                file.transferTo(saveFile);
+                mfRepo.save(mfItem);
+                return;
+            }
+               MenuFiles mf = new MenuFiles();
+                mf.setMfmitem(mitem);
+                mf.setMforiname(orname);
+                String sysname = System.currentTimeMillis() + orname.substring(orname.lastIndexOf("."));
+                mf.setMfsysname(sysname);
+                File saveFile = new File(realPath + sysname);
+                file.transferTo(saveFile);
+                mfRepo.save(mf);
+
         }
 
     }
 
-    // 메뉴 전체 출력
-    public List<Menu> menuList() {
-        log.info("menuList()");
-        return mRepo.findAll();
+    // 메뉴 카테고리별 출력
+    public List<Menu> menuList(String mcate) {
+        List<Menu> menuList = mRepo.findByMcate(mcate);
+        int i = 0;
+        for(Menu menu : menuList){
+            MenuFiles menuFiles = mfRepo.findByMfmitem(menu.getMitem());
+            menu.setMfList(menuFiles);
+            menuList.set(i,menu);
+            i++;
+
+        }
+        return menuList;
     }
+
 
     // 메뉴 개별 출력
     public Menu menuSearch(String mitem) {
         log.info("menuSearch()");
 
         Menu menu = mRepo.findByMitem(mitem);
-        List<MenuFiles> mfList = mfRepo.findByMfmitem(menu.getMitem());
-        menu.setMfList(mfList);
-        return mRepo.findByMitem(mitem);
+        MenuFiles menuFiles = mfRepo.findByMfmitem(menu.getMitem());
+        menu.setMfList(menuFiles);
+        return menu;
     }
 
-    // 메뉴 업데이트
-    public ReturnMsg menuUpdate(Menu menu) {
-        log.info("menuUpdate()");
-        try{
-            mRepo.save(menu);
-            rm.setFlag(true);
-        }catch(Exception e){
-            e.printStackTrace();
-            rm.setFlag(false);
-        }
-        return rm;
-    }
+
 
     // 메뉴 삭제
     public ReturnMsg menuDelete(String mitem) {

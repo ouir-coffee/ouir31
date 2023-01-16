@@ -9,5 +9,6 @@ public interface MenuRepository extends CrudRepository<Menu, String> {
 
     List<Menu> findAll();
     Menu findByMitem(String mitem);
+    List<Menu> findByMcate(String mcate);
 
 }

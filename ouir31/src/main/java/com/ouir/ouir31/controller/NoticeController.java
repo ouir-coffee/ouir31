@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @Log
@@ -50,9 +51,9 @@ public class NoticeController {
 
     @GetMapping("/notice/list")
     @ResponseBody
-    public List<Notice> getNoticeList(Model model, Integer pageNum, HttpSession session){
+    public Map<String, Object> getNoticeList(Integer pageNum, HttpSession session){
         log.info("getNoticeList");
-        return (List<Notice>) nServ.getNoticeList(model,pageNum,session);
+        return nServ.getNoticeList(pageNum,session);
     }
 
     @GetMapping("/notice/download")

@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import Item from "./Item";
 import NextBtn from "./NextBtn";
 import PrevBtn from "./PrevBtn";
 import "./Slide.scss";
 
-const Slide = (props) => {
+const Slide = (best, ...props) => {
   const [slide, setSlide] = useState(0);
-
   const prev = () => {
     if (slide !== 0) {
       setSlide(slide + 350);
@@ -19,18 +19,27 @@ const Slide = (props) => {
     }
   };
 
+  const Best = best.best;
+  const itemList = Object.values(Best).map((value, index) => {
+    const imgPath = "upload/" + Best[index].mfList.mfsysname;
+    return (
+      <Item
+        key={index}
+        imgUrl={imgPath}
+        title={Best[index].mitem}
+        title2={Best[index].mname}
+        contents={Best[index].mcontents}
+      />
+    );
+  });
+
   return (
     <div className="menu_slider">
       <div
         className="best_item"
         style={{ transform: `translateX(${slide}px)` }}
       >
-        <Item title="아메리카노" />
-        <Item title="1" />
-        <Item title="2" />
-        <Item title="3" />
-        <Item title="4" />
-        <Item title="5" />
+        {itemList}
       </div>
       <PrevBtn className={slide === 0 ? "disabled" : ""} onClick={prev} />
       <NextBtn className={slide === -1050 ? "disabled" : ""} onClick={next} />

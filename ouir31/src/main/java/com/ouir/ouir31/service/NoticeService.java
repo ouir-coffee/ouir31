@@ -27,7 +27,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Log
@@ -127,21 +129,8 @@ public class NoticeService {
             return nfList;
     }
 
-    //페이징처리
-    private String getPaging(Integer pageNum, int totalPage) {
-        String pageHtml = null;
-        int pageCnt = 5;
-        String listName = "notice";
-
-        PagingUtil paging = new PagingUtil(totalPage, pageNum, pageCnt, listName);
-        pageHtml = paging.makePaging();
-
-        return pageHtml;
-    }
-
-
     //공지 리스트 출력
-    public Model getNoticeList(Model model, Integer pageNum, HttpSession session){
+    public Map<String, Object> getNoticeList(Integer pageNum, HttpSession session){
         log.info("getNoticeList()");
 
         if(pageNum == null){
@@ -154,14 +143,11 @@ public class NoticeService {
         List<Notice> nList = result.getContent();
         int totalPage = result.getTotalPages();
 
-        String paging = getPaging(pageNum,totalPage);
-
-        model.addAttribute("nList",nList);
-        model.addAttribute("paging",paging);
-
-        session.setAttribute("pageNum",pageNum);
-
-        return model;
+        Map<String, Object> res = new HashMap<>();
+        res.put("totalPage", totalPage);
+        res.put("pageNum", pageNum);
+        res.put("nList", nList);
+        return res;
     }
 
     //공지 파일 다운로드

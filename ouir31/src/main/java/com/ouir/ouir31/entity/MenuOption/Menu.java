@@ -14,6 +14,9 @@ public class Menu {
     @Column(nullable = false, length = 20)
     private String mitem;
 
+    @Column(nullable = false, length = 40)
+    private String mname;
+
     @Column(nullable = false, length = 150)
     private String mcontents;
 
@@ -23,6 +26,9 @@ public class Menu {
     @Column(nullable = false, length = 20)
     private String mcate;
 
+    @Column(nullable = false)
+    private boolean mbest;
+
     @Transient
-    private List<MenuFiles> mfList;
+    private MenuFiles mfList;
 }
