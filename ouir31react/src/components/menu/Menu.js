@@ -8,6 +8,15 @@ import Slide from "./Slide";
 import UpdateMenu from "./UpdateMenu";
 
 const Menu = () => {
+  const uid = sessionStorage.getItem("uid");
+
+  const [adminLogin, setAdmin] = useState(false);
+
+  useEffect(() => {
+    if (uid === "Admin") {
+      setAdmin(true);
+    }
+  }, [uid]);
   //모달 관련 useState
   const [createModal, setCreate] = useState(false);
 
@@ -97,7 +106,7 @@ const Menu = () => {
         <div className="container">
           <h2 className="main_title">추천메뉴</h2>
           <Slide best={bestItem} />
-          <ul className="menu_update">
+          <ul className={adminLogin ? "menu_update show" : "hide"}>
             <li onClick={open1}>[메뉴 생성]</li>
             <li onClick={open2}>[메뉴 수정]</li>
             <li onClick={open3}>[메뉴 삭제]</li>
