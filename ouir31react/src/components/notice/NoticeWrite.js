@@ -1,19 +1,19 @@
 import axios from "axios";
-import moment from "moment";
 import React from "react";
 import { useCallback } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Notice from "./Notice";
-import "./Textarea.scss";
-import "./Input.scss";
-import "./Notice.scss";
-import Button from "./Button";
-import "./Button.scss";
+import "../etc/Textarea.scss";
+import "../etc/Input.scss";
+import "./NoticeWrite.scss";
+import Button from "../etc/Button";
+import "../etc/Button.scss";
 
 const NoticeWrite = () => {
     const navigate = useNavigate();
-    const admin = sessionStorage.getItem("admin");
+    
+    const aid = sessionStorage.getItem("aid");
+
     const [data, setData] = useState({
         ntitle: "",
         ncontents: ""
@@ -24,7 +24,7 @@ const NoticeWrite = () => {
     const { ntitle, ncontents } = data;
 
     //공지 작성 내용 전송
-    const onWrite = useCallback(
+    const noticeWrite = useCallback(
         (e) => {
             e.preventDafault();
             formData.append(
@@ -68,7 +68,8 @@ const NoticeWrite = () => {
 
     return (
         <div className="Main">
-            <form className="Content" onSubmit={onWrite}>
+            <form className="Content" onSubmit={noticeWrite}>
+                <h2 className="main_title">공지 작성해보지아</h2>
                 <input
                     className="Input"
                     name="ntitle"
@@ -87,12 +88,12 @@ const NoticeWrite = () => {
                 ></textarea>
                 <input type="file" name="files" onChange={onFileChange} multiple />
                 <div className="Buttons">
-                <Button wsize="s-10" color="gray" outline onClick={() => navigate(-1)}>
-            뒤로
-          </Button>
-          <Button type="submit" color="ouir1" wsize="s-10">
-            작성
-          </Button>
+                    <Button wsize="s-10" color="gray" outline onClick={() => navigate(-1)}>
+                        뒤로
+                    </Button>
+                    <Button type="submit" color="ouir1" wsize="s-10">
+                        작성
+                    </Button>
                 </div>
             </form>
         </div>

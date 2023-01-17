@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from "react";
 import "./Join.scss";
-import "./Input.scss";
-import "./Button.scss";
-import Button from "./Button.js";
+import "./etc/Input.scss";
+import "./etc/Button.scss";
+import Button from "./etc/Button.js";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -200,8 +200,7 @@ const Join = () => {
     <>
     <div className="Join">
       <form className="Content" onSubmit={sendJoin}>
-        <h1>회원 가입</h1>
-       
+        <h2 className="main_title">회원가입</h2>
         <input
           className="Input"
           name="uid"

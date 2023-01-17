@@ -12,7 +12,7 @@
         color: dimgray;
     }
 
-    &+&, &+.Button, .Button+&,&+div {
+    &+&, &+.Button, .Button+&, &+div {
         margin-top: 1rem;
     }    
 }

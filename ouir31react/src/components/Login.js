@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "./Button";
+import Button from "./etc/Button";
+import "./etc/Button.scss";
 import "./Login.scss";
 
 const Login = ({ sucLogin }) => {
@@ -50,7 +51,7 @@ const Login = ({ sucLogin }) => {
   return (
     <div className="Login">
       <form className="Content" onSubmit={sendLogin}>
-        <h1>로그인</h1>
+        <h2 className="main_title">로그인</h2>
         <input
           className="Input"
           name="uid"
@@ -69,7 +70,7 @@ const Login = ({ sucLogin }) => {
           onChange={onChange}
           required
         />
-        <Button type="submit" size="large">
+        <Button color="ouir1" type="submit" size="large">
           로그인
         </Button>
       </form>

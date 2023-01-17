@@ -4,13 +4,15 @@ import Footer from "./components/Footer";
 import Home from "./components/Home";
 import { Route, Routes ,useNavigate } from "react-router-dom";
 import Menu from "./components/menu/Menu";
-import About from "./components/About";
-import Notice from "./components/Notice";
-import NoticeWrite from "./components/NoticeWrite";
+import About from "./components/about/About";
+import Notice from "./components/notice/Notice";
+import NoticeWrite from "./components/notice/NoticeWrite";
 import Join from "./components/Join";
 import Login from "./components/Login";
 import {useState, useEffect, useCallback} from "react";
 import Mypage from "./components/Mypage";
+import Voc from "./components/voc/Voc";
+import VocWrite from "./components/voc/VocWrite";
 
 function App() {
   const nav = useNavigate();
@@ -62,10 +64,12 @@ function App() {
       <Header lstate={lstate} onLogout={onLogout}/>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/menu" element={<Menu />} />
         <Route path="/about" element={<About/>} />
+        <Route path="/menu" element={<Menu />} />
         <Route path="/notice" element={<Notice />} />
         <Route path="/notice/write" element={<NoticeWrite/>} />
+        <Route path="/voc" element={<Voc />} />
+        <Route path="/voc/write" element={<VocWrite />} />
         <Route path="/login" element={<Login sucLogin={sucLogin} />}/>
         <Route path="/join" element={<Join/>} />
         <Route path="/mypage" element={<Mypage/>}/>

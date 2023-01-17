@@ -1,0 +1,40 @@
+.aboutMain {
+    flex: 1;
+    min-height: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 90px 0 0;
+
+    .Content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        // padding: 10px;
+        // background: #FBFBF0;
+        margin: 0 auto;
+        padding-bottom: 2rem;
+        box-sizing: border-box;
+    }
+
+    .main_title {
+        text-align: center;
+        font-size: 2.187rem;
+        color: #13541D;
+
+        &:after {
+            width: 58px;
+            height: 3px;
+            display: block;
+            margin: 1rem auto 3rem;
+            background: #13541D;
+            content: "";
+          }
+    }
+
+}
+.bgimg {
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: top;   
+}
