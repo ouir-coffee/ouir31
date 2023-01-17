@@ -1,72 +1,128 @@
 .Header {
-    background: #FBFBF0;
-    color: #13541D;
-    margin: 0;
-    width: 100%;
-    position: fixed;
-    z-index: 999;
-    
-    .Content {
-        width: 80%;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
+  background: #fbfbf0;
+  color: #13541d;
+  margin: 0;
+  width: 100%;
+  position: fixed;
+  z-index: 999;
+
+  .Content {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .Logo {
+    margin: auto;
+  }
+
+  .Logostyle {
+    margin: auto;
+    padding-left: 50px;
+    width: 150px;
+    height: 75px;
+    cursor: pointer;
+  }
+
+  .Menu {
+    display: flex;
+    justify-content: flex-end;
+    .Item {
+      margin: auto;
+      padding-top: 40px;
+      padding-right: 5px;
+      a {
+        text-decoration: none;
+        color: #13541d;
+        font-weight: normal;
+        font-size: small;
+      }
     }
-    
-    .Logo {
-        margin: auto;
-    }
-    
-    .Logostyle {
-        margin: auto;
-        padding-left: 50px;
-        width: 150px;
-        height: 75px;
-        cursor: pointer;
-    }
-    
-    .Menu{
-        display: flex;
-        justify-content: flex-end;
-        .Item {
-            margin: auto;
-            padding-top: 40px;
-            padding-right: 5px;
-            a {
-                text-decoration: none;
-                color: #13541D;
-                font-weight: normal;
-                font-size: small;
-            }
-        }
-    }
+  }
 }
 
-
 //메뉴목록!
-ul,li {list-style: none;}
+ul,
+li {
+  list-style: none;
+}
 
-a {text-decoration: none; color: #13541D; display: block;}
+a {
+  text-decoration: none;
+  color: #13541d;
+  display: block;
+}
 
 .Menubar {
-    width: 100%;
-    margin: 0 auto;
-    height: 0;
+  width: 100%;
+  margin: 0 auto;
+  height: 0;
 }
 
 .Menulist {
-    width: 500px;
-    line-height: 75px;
-    color: #13541D;
-    margin: 0 auto;
-    display: flex;
-    font-weight: bold;
-    text-align: center;
-    padding: 0;
-    padding-top: 20px;
-    justify-content: space-between;
+  width: 500px;
+  line-height: 75px;
+  color: #13541d;
+  margin: 0 auto;
+  display: flex;
+  font-weight: bold;
+  text-align: center;
+  padding: 0;
+  padding-top: 20px;
+  justify-content: space-between;
 }
 
-.Menulist>li {
-    margin: 0 auto;
+.Menulist li {
+  margin: 0 auto;
+}
+
+// 드롭다운
+.dropDown {
+  position: absolute;
+  width: 100%;
+  height: 300px;
+  top: 80px;
+  background-color: #13541d;
+  z-index: -1;
+}
+
+.active {
+  height: 300px;
+  animation: down ease-out 0.5s;
+}
+
+.out {
+  height: 0;
+  animation: up ease-out 0.5s;
+}
+
+@keyframes down {
+  0% {
+    height: 0;
+  }
+
+  100% {
+    height: 300px;
+  }
+}
+
+@keyframes up {
+  0% {
+    height: 300px;
+  }
+
+  100% {
+    height: 0;
+  }
+}
+
+.drop_block {
+  display: block;
+  animation: down ease-out 0.2s;
+  color: white;
+}
+.drop_none {
+  display: none;
+  animation: up ease-out 0.2s;
 }
