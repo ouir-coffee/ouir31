@@ -27,6 +27,13 @@ public class MenuController {
         return mServ.menuInsert(menu, files, session);
     }
 
+    // 메뉴 전체 출력
+    @GetMapping("")
+    public List<Menu> menuAll(){
+        log.info("menuAll()");
+        return mServ.menuAll();
+    }
+
     // 메뉴 카테고리별 출력
     @GetMapping("/categories")
     public List<Menu> menuList(@RequestParam String mcate){
@@ -44,8 +51,8 @@ public class MenuController {
 
     // 메뉴 삭제
     @DeleteMapping("")
-    public ReturnMsg menuDelete(String mitem){
-        log.info("menuDelete");
-        return mServ.menuDelete(mitem);
+    public ReturnMsg menuDelete(@RequestParam String mitem, HttpSession session){
+        log.info("menuDelete()");
+        return mServ.menuDelete(mitem,session);
     }
 }

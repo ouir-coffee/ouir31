@@ -66,7 +66,8 @@ public class MenuService {
                     realPath = session.getServletContext().getRealPath("/");
                     realPath += "upload/";
                 }
-
+                realPath = session.getServletContext().getRealPath("/");
+                realPath += "upload/";
                 mfItem.setMfno(mfItem.getMfno());
                 mfItem.setMfmitem(mitem);
                 mfItem.setMforiname(orname);
@@ -89,6 +90,23 @@ public class MenuService {
         }
 
     }
+
+    // 메뉴 전체 출력
+    public List<Menu> menuAll(){
+        List<Menu> menuList = mRepo.findAll();
+
+        int i = 0;
+        for(Menu menu : menuList){
+            MenuFiles menuFiles = mfRepo.findByMfmitem(menu.getMitem());
+            menu.setMfList(menuFiles);
+            menuList.set(i,menu);
+            i++;
+        }
+        return menuList;
+    }
+
+
+
 
     // 메뉴 카테고리별 출력
     public List<Menu> menuList(String mcate) {
@@ -118,14 +136,24 @@ public class MenuService {
 
 
     // 메뉴 삭제
-    public ReturnMsg menuDelete(String mitem) {
-        log.info("menuDelete()");
+    public ReturnMsg menuDelete(String mitem, HttpSession session){
         rm.setFlag(false);
         try{
+            MenuFiles mf = mfRepo.findByMfmitem(mitem);
+
+            if(mf != null){
+            mfRepo.deleteById(mf.getMfno());
+            String realPath = session.getServletContext().getRealPath("/");
+            realPath += "upload/" + mf.getMfsysname();
+            File fileData = new File(realPath);
+            fileData.delete();
+            }
             mRepo.deleteById(mitem);
             rm.setFlag(true);
+            rm.setMsg("삭제되었습니다.");
         }catch (Exception e){
             e.printStackTrace();
+            rm.setMsg("삭제되지 않았습니다.");
             rm.setFlag(false);
         }
         return rm;

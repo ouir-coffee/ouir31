@@ -125,12 +125,7 @@ const UpdateMenu = (props) => {
           onSubmit={update_menu}
         >
           <span>상품명(한글)</span>
-          <input
-            name="mitem"
-            autoFocus
-            defaultValue={mitem || ""}
-            onChange={onChange}
-          />
+          <input name="mitem" autoFocus defaultValue={mitem || ""} disabled />
 
           <span>상품명(ENG)</span>
           <input name="mname" defaultValue={mname || ""} onChange={onChange} />

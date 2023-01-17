@@ -1,38 +1,44 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Item from "./Item";
 import NextBtn from "./NextBtn";
 import PrevBtn from "./PrevBtn";
 import "./Slide.scss";
 
-const Slide = (best, ...props) => {
+const Slide = (props) => {
+  const { best } = props;
+  const length = best.length;
   const [slide, setSlide] = useState(0);
+  const [count, setCount] = useState(3);
+
   const prev = () => {
-    if (slide !== 0) {
-      setSlide(slide + 350);
-    }
+    setSlide(slide + 350);
+    setCount(count - 1);
   };
 
   const next = () => {
-    if (slide !== -1050) {
-      setSlide(slide - 350);
-    }
+    setSlide(slide - 350);
+    setCount(count + 1);
   };
 
-  const Best = best.best;
-  const itemList = Object.values(Best).map((value, index) => {
-    const imgPath = "upload/" + Best[index].mfList.mfsysname;
+  const [active, setActive] = useState(-1);
+
+  const itemList = Object.values(best).map((value, index) => {
+    const imgPath = "upload/" + best[index].mfList.mfsysname;
     return (
       <Item
         key={index}
         imgUrl={imgPath}
-        title={Best[index].mitem}
-        title2={Best[index].mname}
-        contents={Best[index].mcontents}
+        title={best[index].mitem}
+        title2={best[index].mname}
+        contents={best[index].mcontents}
+        index={index}
+        active={active}
+        onClick={() => {
+          active === index ? setActive(-1) : setActive(index);
+        }}
       />
     );
   });
-
   return (
     <div className="menu_slider">
       <div
@@ -42,7 +48,7 @@ const Slide = (best, ...props) => {
         {itemList}
       </div>
       <PrevBtn className={slide === 0 ? "disabled" : ""} onClick={prev} />
-      <NextBtn className={slide === -1050 ? "disabled" : ""} onClick={next} />
+      <NextBtn className={length <= count ? "disabled" : ""} onClick={next} />
     </div>
   );
 };
