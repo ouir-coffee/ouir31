@@ -61,7 +61,7 @@ a {
 }
 
 .Menulist {
-  width: 500px;
+  width: 40vw;
   line-height: 75px;
   color: #13541d;
   margin: 0 auto;
@@ -71,6 +71,13 @@ a {
   padding: 0;
   padding-top: 20px;
   justify-content: space-between;
+  position: relative;
+
+  ul {
+    padding-left: 0;
+    overflow: hidden;
+    margin-top: -10px;
+  }
 }
 
 .Menulist li {
@@ -81,20 +88,19 @@ a {
 .dropDown {
   position: absolute;
   width: 100%;
-  height: 300px;
+  height: 250px;
   top: 80px;
-  background-color: #13541d;
-  z-index: -1;
+  background-color: black;
 }
 
 .active {
-  height: 300px;
-  animation: down ease-out 0.5s;
+  height: 250px;
+  animation: down ease-out 0.3s;
 }
 
 .out {
   height: 0;
-  animation: up ease-out 0.5s;
+  animation: up ease-out 0.3s;
 }
 
 @keyframes down {
@@ -103,13 +109,13 @@ a {
   }
 
   100% {
-    height: 300px;
+    height: 250px;
   }
 }
 
 @keyframes up {
   0% {
-    height: 300px;
+    height: 250px;
   }
 
   100% {
@@ -118,11 +124,9 @@ a {
 }
 
 .drop_block {
-  display: block;
-  animation: down ease-out 0.2s;
   color: white;
 }
 .drop_none {
-  display: none;
-  animation: up ease-out 0.2s;
+  visibility: hidden;
+  height: 0px;
 }

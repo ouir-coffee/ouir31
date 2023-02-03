@@ -28,7 +28,11 @@ const Header = ({ lstate, onLogout }) => {
       <div className={view ? "dropDown active" : "dropDown out"}></div>
       <div className="Content">
         <Link to={home}>
-          <img src="/img/ouircoffee.jpg" className="Logostyle"></img>
+          <img
+            src="/img/ouircoffee.jpg"
+            className="Logostyle"
+            alt="coffee"
+          ></img>
         </Link>
         <nav>
           <div className="Menubar">
@@ -41,32 +45,32 @@ const Header = ({ lstate, onLogout }) => {
                 <li>ABOUT OUIR</li>
                 <ul className={view ? "drop_block" : "drop_none"}>
                   <li>1</li>
-                  <li>2</li>
-                  <li>3</li>
+                  <li>1</li>
+                  <li>1</li>
                 </ul>
               </Link>
               <Link to={menu}>
                 <li>MENU</li>
                 <ul className={view ? "drop_block" : "drop_none"}>
-                  <li>1</li>
-                  <li>2</li>
-                  <li>3</li>
+                  <li>Coffee</li>
+                  <li>Non Coffee</li>
+                  <li>MD</li>
                 </ul>
               </Link>
               <Link to={notice}>
                 <li>NOTICE</li>
                 <ul className={view ? "drop_block" : "drop_none"}>
                   <li>1</li>
-                  <li>2</li>
-                  <li>3</li>
+                  <li>1</li>
+                  <li>1</li>
                 </ul>
               </Link>
               <Link to={voc}>
                 <li>VOC</li>
                 <ul className={view ? "drop_block" : "drop_none"}>
                   <li>1</li>
-                  <li>2</li>
-                  <li>3</li>
+                  <li>1</li>
+                  <li>1</li>
                 </ul>
               </Link>
             </ul>
